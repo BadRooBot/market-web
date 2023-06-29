@@ -147,9 +147,9 @@ export default function AllMovies() {
           tableName: 'Moves',
         }),
       }
-    );
+      ).catch((e)=>{console.log('error in movies page')});
 
-    if (countOfAllMoves.status === 200) {
+    if (countOfAllMoves?.status === 200) {
       const count = await countOfAllMoves.json();
       videosCount=count
       console.log("testx",( db.countOfMovies!==count))
@@ -174,8 +174,13 @@ export default function AllMovies() {
   };
 
   useEffect(() => {
-    getCount();
-  }, []);
+    try{
+      getCount();
+
+    }catch(e){
+      console.log('error in get count')
+    }
+    }, []);
 
   return (
     <>

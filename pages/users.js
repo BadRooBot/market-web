@@ -113,9 +113,9 @@ const people = [
             tableName: 'users',
           }),
         }
-      );
+      ).catch((e)=>{console.log('error in users page')});
   
-      if (countOfAlluser.status === 200) {
+      if (countOfAlluser?.status === 200) {
         const count = await countOfAlluser.json();
         UsersCount=count
         console.log("testx",( db.countOfUsers!==count))
@@ -137,8 +137,12 @@ const people = [
   
   
     useEffect(() => {
-      getCount();
-    }, []);   
+      try{
+        getCount();
+  
+      }catch(e){
+        console.log('error in get count users')
+      }    }, []);   
     
     const saveSelected=(UserData)=>{
       dispatch(saveSelectedUaserData(UserData))

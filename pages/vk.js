@@ -1,77 +1,104 @@
-import { URL } from 'next/dist/compiled/@edge-runtime/primitives/url';
 import { useState } from 'react';
 
+const UploadPage = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
 
-const b64='data:video/mp4;base64,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'
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('video', selectedFile);
+      try {
+        const name=document.getElementById('inputName').value;
+        const bio=document.getElementById('inBio').value;
+        console.log('name',name)
+        // const response = await fetch('http://localhost:5000/upload', {
+        //   method: 'POST',
+        //   body: formData,
+        // });
 
-
-function UploadVideo() {
-
-// ...
-
-const [filePath, setFilePath] = useState('');
-let mypath;
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  mypath=file
-  setFilePath(file );
-};
-
-const handleSubmit =async (event) => {
-  event.preventDefault();
-  const filePath2=document.getElementById('in-file')
-   let fr=new FileReader();
-   const formData = new FormData();
-  formData.append('file', filePath);
-
-
-
-   fr.onload=async()=>{
-    const tt=b64.replace(/^data:image\/\w+;base64,/, '');
-    const buffer = Buffer.from(tt, 'base64');
-    console.log(buffer)
-     setFilePath(fr.result );
-    mypath=JSON.stringify({file:fr.result})
-
-    await fetch('/api/upload_to_vk', {
-      method: 'POST',
-      body:mypath,
-      headers: {
-        'Content-Type': 'application/json'
+        // if (response.ok) {
+        //   const data=await response.json()
+        //   // File uploaded successfully
+        //   console.log('File uploaded!',data);
+        //   const bodyJSON={'name':name, 'videoUrl':'', 'bio':bio,'imageUrl':'', 'release_time':'','tag':['']};
+        //   fetch('http://localhost:5000/addMoves',{
+        //     method:'POST',
+        //     body:bodyJSON
+        //   })
+        // } else {
+        //   // Handle error response
+        //   console.error('Upload failed!');
+        // }
+      } catch (error) {
+        // Handle fetch error
+        console.error('Upload failed!', error);
       }
-    })
-      .then(async (response) => {
-        const data =await response.json();
-        if (response.ok) {
-          console.log('File path sent successfully',data);
-        } else {
-  
-          console.error('Failed to send file path','data');
-        }
-      })
-      .catch((error) => {
-        console.error('An error occurred while sending the file path', error);
-      });
-   }
-
-    fr.readAsDataURL(filePath2.files[0])
-   // Send the file path to your server
-};
-
+    }
+  };
 
   return (
-    <div>
-   <div>
-  <form id="file-form" className="space-y-6"  onSubmit={handleSubmit} encType="multipart/form-data">
-    <input id='in-file' type="file" name="file" onChange={handleFileChange} />
-    <input type="submit" value="Upload" />
-  </form>
-</div>
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <h1 className='mb-16'>Upload Video</h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
 
+
+              <div >
+                <label htmlFor="inFile" className="block text-sm font-medium leading-6 text-gray-400">
+                  select File
+                </label>
+                <div className="mt-2">
+        <input type="file" name='inFile' id='inFile' accept="video/*" onChange={handleFileChange} className='text-gray-200 rounded-lg me-1 ms-1 bg-black'/>
+                 
+                </div>
+              </div>
+              <div >
+                <label htmlFor="inputName" className="block text-sm font-medium leading-6 text-gray-400">
+                Movie Name
+                </label>
+                <div className="mt-2">
+        <input type="text" id='inputName' name='inputName'className='text-gray-200 rounded-lg me-1 ms-1 bg-black'/>
+                 
+                </div>
+              </div>
+              <div >
+                <label htmlFor="inBio" className="block text-sm font-medium leading-6 text-gray-400">
+                Description of the movie
+                </label>
+                <div className="mt-2">
+        <input type="text" id='inBio' name='inBio' className='text-gray-200 rounded-lg me-1 ms-1 bg-black'/>
+                 
+                </div>
+              </div>
+              <div >
+                <label htmlFor="Release_time" className="block text-sm font-medium leading-6 text-gray-400">
+                Release Time
+                </label>
+                <div className="mt-2">
+        <input type="text" id='inRelease_time' name='inRelease_time'className='text-gray-200 rounded-lg me-1 ms-1 bg-black' />
+                 
+                </div>
+              </div>
+              <div >
+                <label htmlFor="inTags" className="block text-sm font-medium leading-6 text-gray-400">
+                Tags
+                </label>
+                <div className="mt-2">
+        <input type="month" id='inTags' name='inTags' className='text-gray-200 rounded-lg me-1 ms-1 bg-black'/>
+                 
+                </div>
+              </div>
+        <button type="submit">Upload</button>
+      </form>
+      </div>
     </div>
   );
-}
+};
 
-export default UploadVideo;
+export default UploadPage;
