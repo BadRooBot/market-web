@@ -1,137 +1,176 @@
-'use client';
-import { Suspense } from "react";
-import {  useSelector } from "react-redux";
-
-
-
-const products = [
+import { saveOneUserdata, saveOneVideodata } from "@/slices/dbSlice";
+import { loginSuccess } from "@/slices/userSlice";
+import { Suspense, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+var proMovies = [
   {
-    id: 1,
-    name: 'John Wick: Chapter 4',
-    href: '#',
-    price: '$48',
-    imageSrc: 'https://img.sflix.to/xxrz/250x400/224/1e/9e/1e9efbf118acd1e7661d144868dc5ef5/1e9efbf118acd1e7661d144868dc5ef5.jpg',
-    imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-  },
-  {
-    id: 2,
-    name: 'The Little Mermaid',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://img.sflix.to/xxrz/250x400/224/fc/7d/fc7de6b957d0dfb5f3b719c812093766/fc7de6b957d0dfb5f3b719c812093766.jpg',
-    imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-  },
-  {
-    id: 3,
-    name: 'Focus Paper Refill',
-    href: '#',
-    price: '$89',
-    imageSrc: 'https://images.thedirect.com/media/article_full/the-little-mermaid-every-song-in-live-action-remake-ranked-worst-to-best.jpg',
-    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-  },
-  {
-    id: 4,
-    name: 'Machined Mechanical Pencil',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-  },
-  {
-    id: 5,
-    name: 'Earthen Bottle',
-    href: '#',
-    price: '$48',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
-    imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-  },
-  {
-    id: 6,
-    name: 'Nomad Tumbler',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-    imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-  },
-  {
-    id: 7,
-    name: 'Focus Paper Refill',
-    href: '#',
-    price: '$89',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
-    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-  },
-  {
-    id: 8,
-    name: 'Machined Mechanical Pencil',
-    href: '#',
-    price: '$35',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-  },
+    "name": "A B O S H E R Ix F",
+    "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239101&hash=c7631ed2d84cc0ad&__ref=vk.android&api_hash=1688092869d43768e898d75f177b_HAYDKOBXGI2DGMQ",
+    "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
+    "imageurl": "https://th.bing.com/th/id/OIP.7Z4AZIQW34k4LhHea-YJFgHaMQ?pid=ImgDet&rs=1",
+    "release_time": "3232-02-23",
+    "moves_id": 20,
+    
+    "tag": [
+    "new"
+    ],
+    
+    "publisher_id": null
+    },
+    {
+      "name": "No marcy",
+      "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239103&hash=030dc9e309657da2&__ref=vk.android&api_hash=1688120557d730b799495074c6c5_HAYDKOBXGI2DGMQ",
+      "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
+      "imageurl": "https://cdn.max-c.com/heybox/dailynews/img/5eba1b13e8efc5b0d0425cf72e2fec2b.png?imageMogr2/format/jpg",
+      "release_time": "2000-05-08",
+      "moves_id": 21,
+      
+      "tag": [
+      "new"
+      ],
+      
+      "publisher_id": null
+      },  
+      {
+        "name": "Ant-Man and the Wasp: Quantumania 2023",
+        "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239111&hash=6125cb94afca417b&__ref=vk.android&api_hash=1688225005c20514804e72553137_HAYDKOBXGI2DGMQ",
+        "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
+        "imageurl": "https://src.pcsoft.com.cn/d/file/article/rjjc/syjc/2018-01-12/ae1af02ba65919b0b10d946c31459651.jpg",
+        "release_time": "2013-03-03",
+        "moves_id": 26,
+        
+        "tag": [
+        "new"
+        ],
+        "publisher_id": "42767fdb-adb3-4eaa-b5ac-b595ca33e624"
+        }
+     
+    
   // More products...
 ]
 
- const UserProfile = ({userId}) => {
-  const myData = useSelector(state=>state.db);
 
-  const url = myData.currentUser?.image_url;
-  const name= myData.currentUser?.username;
-  console.log(url)
-  console.log(name)
-  return  <Suspense fallback={<h2>loading..</h2>}>
+const UserProfile = ({ userId }) => {
+  const [name, setname] = useState(null);
+  const [url, seturl] = useState(null);
+  const [posts, setposts] = useState([]);
+
+  const dispatch = useDispatch();
+  const StData = userId?.split('user=');
+  const myData = useSelector((state) => state.user);
+  const myDbData = useSelector((state) => state.db);
+  let _userID;
+
+  const saveSelectedvideo = (UserData) => {
+    dispatch(saveOneVideodata(UserData));
+  };
+  const [products, setProducts] = useState([]);
+
+  const getMyPosts = async (id) => {
+    try {
+      console.log(id);
+      const response = await fetch('http://localhost:5000/user-movies-post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id }),
+      });
+      const result = await response.json();
+      const newProducts = result.filter((x) => !products.some((p) => p.moves_id === x.moves_id));
+      setProducts((prevProducts) => [...proMovies, ...newProducts]);
+      console.log('result: ', result);
+    } catch (error) {
+      console.log('Error: ', error);
+    }
+  };
   
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  sm:mx-auto sm:w-full sm:max-w-sm">
-    <img className=" rounded-full  w-60" src={url}/>
-    <h4 className=" font-bold text-3xl  mt-6  text-center" >{name}</h4>
-    <h4 className=" text-xl  mt-2 text-center" >{'Enjoy life is short'}</h4>
+  
+  useEffect(() => {
+    function getUserData() {
+      if (StData[1] === 'me') {
+        seturl(myData.currentUser.jsonData.image_url);
+        setname(myData.currentUser?.jsonData.username);
+        _userID = myData.currentUser?.jsonData.id;
+      } else {
+        if (myData.currentUser === null) {
+          const jsonData = JSON.parse(decodeURIComponent(StData[1]));
+          dispatch(loginSuccess({ jsonData }));
+          dispatch(saveOneUserdata(jsonData));
+          seturl(jsonData.image_url);
+          setname(jsonData.username);
+          _userID = jsonData.id;
+        } else {
+          if (myDbData.selectedUser !== null) {
+            seturl(myDbData.selectedUser.image_url);
+            setname(myDbData.selectedUser.username);
+            _userID = myData.selectedUser?.id;
+          }
+        }
+      }
+    }
 
-    <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  
-                  mt-4  "  
-                >
-                  Follow {name}
-                </button>
+    try {
+      getUserData();
+      getMyPosts(_userID);
+    } catch (e) {
+      console.log('error in get count users', e);
+    }
+  }, []);
 
-    </div>
-    <div  style={{backgroundColor:'#1e2129'}}>
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
+  return (
+    <Suspense fallback={<h2>loading..</h2>}>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  sm:mx-auto sm:w-full sm:max-w-sm">
+        <img className="rounded-full  w-60 " src={url} />
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-9 rounded-lg">
-          {products.map((product) => (
-            <a key={product.id} href={`/watch/${product.id}`} className="group rounded-lg"  style={{backgroundColor:'#343a40'}} >
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="h-72  w-full object-cover object-center group-hover:opacity-75"
-                />
-              </div>
-              <h3 className="mt-4  text-white text-center text-lg  font-medium mr-auto pb-6" >{product.name}</h3>
-             
-            </a>
-          ))}
+        <h4 className="font-bold text-3xl  mt-6  text-center">{name}</h4>
+        <h4 className="text-xl  mt-2 text-center">{status}</h4>
+
+        <button
+          type="submit"
+          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
+        >
+          Follow {name}
+        </button>
+      </div>
+      <div style={{ backgroundColor: '#1e2129' }}>
+        <div className="mx-auto max-w-2xl px-4 py-2 sm:px-6 sm:py-1 lg:max-w-7xl lg:px-8">
+          <h2 >Videos Shareit</h2>
+
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-9 rounded-lg">
+            {products.map((product) => (
+              <a
+                key={product.moves_id}
+                onClick={() => saveSelectedvideo(product)}
+                href={`/watch/${product.moves_id}`}
+                className="group rounded-lg"
+                style={{ backgroundColor: '#343a40' }}
+              >
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                  <img
+                    src={product.imageurl}
+                    alt={product.name}
+                    className="h-72 w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mt-4 text-white text-center text-lg font-medium mr-auto pb-6">
+                  {product.name}
+                </h3>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Suspense>
+  );
+};
 
-  
-  </Suspense>
-
-}
-
-export  default UserProfile
-
+export default UserProfile;
 
 export async function getServerSideProps({ params }) {
-
-
   return {
     props: {
-      userId:params?.userId.replace('user=', '') || null,
+      userId: params.userId,
     },
   };
 }
-

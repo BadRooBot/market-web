@@ -4,11 +4,16 @@ import { Disclosure, Menu,Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { logout } from '@/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteAll } from '@/slices/dbSlice';
+import { useState } from 'react';
+import SearchView from '@/components/search_View'
+import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'users', href: '/users', current: false },
   { name: 'All Movies', href: '/all_movies', current: false },
+  { name: 'Upload Video', href: '/upload_video', current: false },
   { name: 'login', href: '/login', current: false },
 ]
 
@@ -30,18 +35,29 @@ switch(usePathname()){
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 const myLogo='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FOIG-PhotoRoom.png-PhotoRoom.png?alt=media&token=4274e406-53ea-4ce9-8553-ced2826b6d1a';
 const myLogo2='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2F_930c2af4-3948-41c6-b609-9ff668b5edd1-PhotoRoom.png-PhotoRoom.png?alt=media&token=e1389367-bb1b-4209-8b55-2ccd9731725e';
+
+
 export default function AppBar() {
   const dispatch = useDispatch();
   const userLogout=()=>{   
     dispatch(logout())
+    dispatch(deleteAll())
   }
   const myData = useSelector(state=>state.user);
   const isLoggedIn=  myData.IsLogin;
   if(isLoggedIn){
    // navigation.splice(3,1)
+  
+  
   }
+  
+const [searchQuery, setSearchQuery] = useState('');
+const router = useRouter();
+
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -93,7 +109,48 @@ export default function AppBar() {
                   </div>
                 </div>
               </div>
+              <div className="relative flex items-center">
+              <input
+        type="search"
+        value={searchQuery}
+        onChange={(e) => 
+          {
+            setSearchQuery(e.target.value)
+           
           
+          }
+          
+        }
+        onKeyDown={(e)=>{
+          if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent the default behavior of the Enter key
+            const inputValue = e.target.value;
+            console.log(inputValue)
+            //go to new page
+            router.push(`/Search/${inputValue}`);
+
+          }
+      
+        }}
+        className=" border-indigo-800 peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+        id="exampleSearch2"
+        placeholder="Type query" />
+      <label
+        htmlFor="exampleSearch2"
+        className=" pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+        >
+          {
+           searchQuery==''? 'Search':''
+          }
+          </label>
+    </div>
+
+    <div className="snap-y absolute overflow-visible right-[8%] top-14 mb-0 max-w-[90%] origin-[0_0]  pt-[0.37rem]  bg-black">
+    {/* <SearchView  style={{width:open?'26%':'40%'}}  /> */}
+      </div>
+
+   
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
@@ -159,6 +216,7 @@ export default function AppBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
+              
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
@@ -173,8 +231,11 @@ export default function AppBar() {
                   {item.name}
                 </Disclosure.Button>
               ))}
+              
             </div>
           </Disclosure.Panel>
+        
+
         </>
       )}
     </Disclosure>

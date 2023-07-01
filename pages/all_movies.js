@@ -1,4 +1,4 @@
-import { loadVideoSuccess, moviesCount, saveSelectedUaserData } from "@/slices/dbSlice";
+import { loadVideoSuccess, moviesCount, saveOneVideodata, saveSelectedUaserData } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -157,20 +157,23 @@ export default function AllMovies() {
       if (count !== db.countOfMovies) {
         AllMoviesData();
       }else{
-        const databaseVideo=db.currentVideo?.dbDatatosave
-       await  databaseVideo.forEach((x) => {
+        console.log(db)
         
-          if (!products.some((product) => product.moves_id === x.moves_id)) {
-            products.push(x); // Add the new movie to products
-          }
-        });
-        saveData(products);
-      }
+        const databaseVideo=db.currentVideo?.dbDatatosave
+        await  databaseVideo.forEach((x) => {
+         
+           if (!products.some((product) => product.moves_id === x.moves_id)) {
+             products.push(x); // Add the new movie to products
+           }
+         });
+         saveData(products);
+         }
+        
     }
   };
 
   const saveSelectedvideo = (UserData) => {
-    dispatch(saveSelectedUaserData(UserData));
+    dispatch(saveOneVideodata(UserData));
   };
 
   useEffect(() => {

@@ -4,7 +4,9 @@ export const dbSlice = createSlice({
   name: 'db',
   initialState: {
     currentVideo:null,
+    selectedVideo:null,
     currentUser:null,
+    selectedUser:null,
     loading:false,
     error:false,
     countOfMovies:0,
@@ -16,12 +18,20 @@ export const dbSlice = createSlice({
         state.loading=true
      
     },
+    saveOneVideodata: (state,action) => {
+      state.loading=false
+      state.selectedVideo=action.payload
+     },
+     saveOneUserdata: (state,action) => {
+      state.loading=false
+      state.selectedUser=action.payload
+     },
     loadVideoSuccess: (state,action) => {
      state.loading=false
      state.currentVideo=action.payload
     },
     saveSelectedUaserData: (state,action) => {
-      state.currentUser=null
+      //state.currentUser=null
       state.loading=false
       state.currentUser=action.payload
      },
@@ -32,6 +42,8 @@ export const dbSlice = createSlice({
     deleteAll:(state)=>{
         state.currentVideo=null
         state.currentUser=null
+        state.selectedUser=null
+        state.selectedVideo=null
         state.loading=false
         state.error=false
         state.countOfMovies=0
@@ -47,6 +59,6 @@ export const dbSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { loginStart, loadVideoSuccess,saveSelectedUaserData, loginfailure ,deleteAll,moviesCount,usersCount} = dbSlice.actions
+export const { loginStart, loadVideoSuccess,saveSelectedUaserData, loginfailure ,deleteAll,moviesCount,usersCount,saveOneVideodata,saveOneUserdata} = dbSlice.actions
 
 export default dbSlice.reducer

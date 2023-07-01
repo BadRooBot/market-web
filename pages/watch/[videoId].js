@@ -5,11 +5,12 @@ import ReactPlayer from "react-player";
 
 const Watch = ({videoId}) => {
   const video = useSelector(state=>state.db);
-  const imageurl = video.currentUser?.imageurl;
-   const name = video.currentUser?.name;
-  const videourl = video.currentUser?.videourl;
-  const bio = video.currentUser?.bio;
-  const release_time = video.currentUser?.release_time;
+  console.log('++++++++++++++++++|| video || +++++++++++++++',video)
+  const imageurl = video.selectedVideo?.imageurl;
+   const name = video.selectedVideo?.name;
+  const videourl = video.selectedVideo?.videourl;
+  const bio = video.selectedVideo?.bio;
+  const release_time = video.selectedVideo?.release_time;
   console.log(name)
   
   return (
@@ -37,7 +38,7 @@ const Watch = ({videoId}) => {
 </div>
 
       {/* <ReactPlayer className=" m-7" url='https://vk.com/video_ext.php?oid=-22781583&id=456253339&hash=13a8d88e727024be&hd=2' width={'88%'}   controls={true} /> */}
-      <iframe className="w-5/6 m-7 " height={'500px'} src={videourl}  allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
+      <iframe className="w-5/6 m-7 " height={'500px'} src={videourl}  allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowFullScreen></iframe>
 
         
     </Suspense>

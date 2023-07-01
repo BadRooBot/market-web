@@ -12,6 +12,7 @@
   }
   ```
 */
+
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Fragment, useRef, useState } from 'react';
@@ -42,13 +43,13 @@ export default function Login() {
 
 
 
-
 <>
 
 
 <Transition.Root show={Iserror} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setIserror(false)}>
           <div className="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0">
+          
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -188,7 +189,8 @@ export default function Login() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm transition duration-150 ease-in-out hover:bg-indigo-900 hover:bg-opacity-7 focus:outline-none focus:ring-0"
                 >
                   Sign in
                 </button>

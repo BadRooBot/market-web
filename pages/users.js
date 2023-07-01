@@ -1,4 +1,4 @@
-import { loadVideoSuccess } from "@/slices/dbSlice";
+import { loadVideoSuccess, saveOneUserdata } from "@/slices/dbSlice";
 import { saveSelectedUaserData, usersCount } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,7 +74,8 @@ const people = [
     const db = useSelector(state => state.db);
   
     const saveData = (dbDatatosaveusers) => {
-      dispatch(loadVideoSuccess({ dbDatatosaveusers }));
+      dispatch(saveSelectedUaserData({ dbDatatosaveusers }));
+      console.log('db user: ',db)
     };
   
     const AllUsersData = async () => {
@@ -120,10 +121,10 @@ const people = [
         UsersCount=count
         console.log("testx",( db.countOfUsers!==count))
   
-        if (count === db.countOfUsers) {
+        if (count !== db.countOfUsers) {
           AllUsersData();
         }else{
-          const databaseVideo=db.currentVideo?.dbDatatosaveusers
+          const databaseVideo=db.currentUser?.dbDatatosaveusers
          await  databaseVideo.forEach((x) => {
           
             if (!people.some((product) => product.id === x.id)) {
@@ -145,14 +146,14 @@ const people = [
       }    }, []);   
     
     const saveSelected=(UserData)=>{
-      dispatch(saveSelectedUaserData(UserData))
+      dispatch(saveOneUserdata(UserData))
     }
     return (
 < >
 <ul role="list" className=" divide-purple-600 mx-auto max-w-2xl px-4 py-1 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8" >
-        {people.map((person) => (
+        {people.map((person,index) => (
           
- <a key={person.email} href={`/user/${person.email}`} onClick={ 
+ <a key={index} href={`/user/${person.email}`} onClick={ 
   function fOnClick(){
     saveSelected(person)
   }
@@ -160,10 +161,10 @@ const people = [
    
       <li key={person.email} className="flex justify-between gap-x-6 py-5">
             <div className="flex gap-x-4">
-              <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
+              <img  className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-100">{person.username}</p>
-                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>
+                <p  className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>
               </div>
             </div>
             <div className="hidden sm:flex sm:flex-col sm:items-end">
