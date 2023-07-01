@@ -2,6 +2,7 @@ import { loadVideoSuccess, saveOneUserdata } from "@/slices/dbSlice";
 import { saveSelectedUaserData, usersCount } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {API_URL} from'@/myenv'
 
 
 const people = [
@@ -81,7 +82,7 @@ const people = [
     const AllUsersData = async () => {
       let AllUsersList = [];
       const getUsersdata = await fetch(
-        'http://localhost:5000/get-All-user',
+        API_URL+'/get-All-user',
         {
           method: 'GET',
           headers: {
@@ -104,7 +105,7 @@ const people = [
   
     const getCount = async () => {
       const countOfAlluser = await fetch(
-        'http://localhost:5000/get-count',
+        API_URL+'/get-count',
         {
           method: 'POST',
           headers: {

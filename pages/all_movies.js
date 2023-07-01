@@ -1,6 +1,7 @@
 import { loadVideoSuccess, moviesCount, saveOneVideodata, saveSelectedUaserData } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {API_URL} from'@/myenv'
 
 
 var products = [
@@ -114,7 +115,7 @@ export default function AllMovies() {
   const AllMoviesData = async () => {
     let AllMoviesList = [];
     const getMoves = await fetch(
-      'http://localhost:5000/Moves_posts',
+      API_URL+'/Moves_posts',
       {
         method: 'GET',
         headers: {
@@ -137,7 +138,7 @@ export default function AllMovies() {
 
   const getCount = async () => {
     const countOfAllMoves = await fetch(
-      'http://localhost:5000/get-count',
+      API_URL+'/get-count',
       {
         method: 'POST',
         headers: {

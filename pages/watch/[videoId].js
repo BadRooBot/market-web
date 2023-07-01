@@ -5,13 +5,11 @@ import ReactPlayer from "react-player";
 
 const Watch = ({videoId}) => {
   const video = useSelector(state=>state.db);
-  console.log('++++++++++++++++++|| video || +++++++++++++++',video)
   const imageurl = video.selectedVideo?.imageurl;
    const name = video.selectedVideo?.name;
   const videourl = video.selectedVideo?.videourl;
   const bio = video.selectedVideo?.bio;
   const release_time = video.selectedVideo?.release_time;
-  console.log(name)
   
   return (
     <Suspense fallback={<h2>loading..</h2>}>

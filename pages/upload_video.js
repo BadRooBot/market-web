@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BarLoader } from 'react-spinners';
 import ShowDialog from '@/components/dialog'
+import {API_URL} from'@/myenv'
+
 const UploadPage = () => {
   const override = {
     display: "block",
@@ -54,7 +56,7 @@ const UploadPage = () => {
         const Release_time=document.getElementById('inRelease_time').value;
         const tags=document.getElementById('inTags').value;
         console.log('name',tags+nameVideo+bio+image+Release_time)
-        const response = await fetch('http://localhost:5000/upload', {
+        const response = await fetch(API_URL+'/upload', {
           method: 'POST',
           body: formData,
         });
@@ -66,7 +68,7 @@ const UploadPage = () => {
           const videoUrl=data.videourl
           const bodyJSON={'publisherID':userId,'owner_id':`${data.success.ownerId}`,'video_id':data.success.id,'name':nameVideo, 'videoUrl':videoUrl, 'bio':bio,'imageUrl':image, 'release_time':`${Release_time}`,'tag':  tags.split(',')};
           if(videoUrl!==undefined||videoUrl!==null){
-            fetch('http://localhost:5000/addMoves',{
+            fetch(API_URL+'/addMoves',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

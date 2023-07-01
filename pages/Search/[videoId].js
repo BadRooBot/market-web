@@ -1,6 +1,7 @@
 import { saveOneVideodata } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import {API_URL} from'@/myenv'
 
 var products = [
     {
@@ -21,7 +22,7 @@ var products = [
   const getSearchResult = async (id) => {
     try {
       console.log(id);
-      const response = await fetch('http://localhost:5000/getOneMoves', {
+      const response = await fetch(API_URL+'/getOneMoves', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

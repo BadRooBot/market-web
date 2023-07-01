@@ -2,6 +2,8 @@ import { saveOneUserdata, saveOneVideodata } from "@/slices/dbSlice";
 import { loginSuccess } from "@/slices/userSlice";
 import { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {API_URL} from'@/myenv'
+
 var proMovies = [
   {
     "name": "A B O S H E R Ix F",
@@ -69,7 +71,7 @@ const MyProfile = ({ userId }) => {
   const getMyPosts = async (id) => {
     try {
       console.log(id);
-      const response = await fetch('http://localhost:5000/user-movies-post', {
+      const response = await fetch(API_URL+'/user-movies-post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

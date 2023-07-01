@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import {API_URL} from'@/myenv'
 
  
 
@@ -8,7 +9,7 @@ export default async function handler(req, res) {
     const { username, password, email } = req.body;
     const url='https://th.bing.com/th/id/OIG.SyICO9MgHcrqErOgoHbZ?pid=ImgGn';
     const signup = await fetch(
-      'http://localhost:5000/signup',
+      API_URL+'/signup',
       {
         method: 'POST',
         headers: {
