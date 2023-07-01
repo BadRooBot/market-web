@@ -2,6 +2,8 @@ import { saveOneVideodata } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {API_URL} from'@/myenv'
+import Link from "next/link";
+import Image from "next/image";
 
 var products = [
     {
@@ -59,7 +61,7 @@ export default function SearchVideo({videoId}){
           <h2 className="sr-only">Products</h2>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-9 rounded-lg">
             {products.map((product) => (
-              <a
+              <Link
                 key={product.moves_id}
                 onClick={() => saveSelectedvideo(product)}
                 href={`/watch/${product.moves_id}`}
@@ -67,7 +69,7 @@ export default function SearchVideo({videoId}){
                 style={{ backgroundColor: '#343a40' }}
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                  <img
+                  <Image
                     src={product.imageurl}
                     alt={product.name}
                     className="h-72 w-full object-cover object-center group-hover:opacity-75"
@@ -76,7 +78,7 @@ export default function SearchVideo({videoId}){
                 <h3 className="mt-4 text-white text-center text-lg font-medium mr-auto pb-6">
                   {product.name}
                 </h3>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -84,7 +86,7 @@ export default function SearchVideo({videoId}){
     </>
 
     )
-
+    
 }
 
 

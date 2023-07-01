@@ -3,6 +3,8 @@ import { saveSelectedUaserData, usersCount } from "@/slices/dbSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {API_URL} from'@/myenv'
+import Link from "next/link";
+import Image from "next/image";
 
 
 const people = [
@@ -154,7 +156,7 @@ const people = [
 <ul role="list" className=" divide-purple-600 mx-auto max-w-2xl px-4 py-1 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8" >
         {people.map((person,index) => (
           
- <a key={index} href={`/user/${person.email}`} onClick={ 
+ <Link key={index} href={`/user/${person.email}`} onClick={ 
   function fOnClick(){
     saveSelected(person)
   }
@@ -162,7 +164,7 @@ const people = [
    
       <li key={person.email} className="flex justify-between gap-x-6 py-5">
             <div className="flex gap-x-4">
-              <img  className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
+              <Image  className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-100">{person.username}</p>
                 <p  className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>
@@ -184,7 +186,7 @@ const people = [
               )}
             </div>
           </li>
-          </a>
+          </Link>
         ))}
       </ul>
 

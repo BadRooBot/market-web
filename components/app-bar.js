@@ -8,6 +8,8 @@ import { deleteAll } from '@/slices/dbSlice';
 import { useState } from 'react';
 import SearchView from '@/components/search_View'
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
@@ -17,20 +19,6 @@ const navigation = [
   { name: 'login', href: '/login', current: false },
 ]
 
-
-function setCurrent(){
-switch(usePathname()){
-  case '/':
-    navigation[0].current=true;
-  case '/users':
-    navigation[1].current=true;
-  case '/all_movies':
-  navigation[2].current=true;
-  case '/login':
-    navigation[3].current=true;
-          
-}
-}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -77,12 +65,12 @@ const router = useRouter();
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                  <Image
                     className="block h-12 w-12 rounded-full lg:hidden"
                     src={myLogo2}
                     alt="Black Lotus"
                   />
-                  <img
+                  <Image
                     className="hidden h-12 w-12 rounded-full lg:block"
                     src={myLogo}
                     alt="Black Lotus"
@@ -91,7 +79,7 @@ const router = useRouter();
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 ">
                     {navigation.map((item) => ( 
-                      <a
+                      <Link
                      
                         key={item.name}
                         href={item.href}
@@ -102,7 +90,7 @@ const router = useRouter();
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))
                     
                     }
@@ -165,7 +153,7 @@ const router = useRouter();
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <Image
                         className="h-8 w-8 rounded-full"
                         src="https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FDefault_A_hyper_realistic_colorful_cosmic_colored_lotus_flower_0_374e78ba-6fce-4d7c-a4e3-e11fb6c36006_1.jpg?alt=media&token=3b77046f-e410-46bc-b305-1754bbd79e31"
                         alt=""
@@ -175,27 +163,27 @@ const router = useRouter();
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item className={isLoggedIn?'visible':'hidden'}>
                         {({ active }) => (
-                          <a
+                          <Link
                             href="/profile/user=me"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <Link
                           onClick={
                             userLogout
                                             }
@@ -204,7 +192,7 @@ const router = useRouter();
                           >
                             Sign out
                            
-                            </a>
+                            </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

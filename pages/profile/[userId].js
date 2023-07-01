@@ -1,8 +1,12 @@
+'use client'
+
 import { saveOneUserdata, saveOneVideodata } from "@/slices/dbSlice";
 import { loginSuccess } from "@/slices/userSlice";
 import { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {API_URL} from'@/myenv'
+import Link from "next/link";
+import Image from "next/image";
 
 var proMovies = [
   {
@@ -55,7 +59,6 @@ var proMovies = [
 const MyProfile = ({ userId }) => {
   const [name, setname] = useState(null);
   const [url, seturl] = useState(null);
-  const [posts, setposts] = useState([]);
 
   const dispatch = useDispatch();
   const StData = userId?.split('user=');
@@ -75,6 +78,8 @@ const MyProfile = ({ userId }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json', // Add this line
+
         },
         body: JSON.stringify({ id: id }),
       });
@@ -87,7 +92,7 @@ const MyProfile = ({ userId }) => {
     }
   };
   
-  
+  const status='Enjoy your time, life is short'
   useEffect(() => {
     function getUserData() {
       if (StData[1] === 'me') {
@@ -123,7 +128,7 @@ const MyProfile = ({ userId }) => {
   return (
     <Suspense fallback={<h2>loading..</h2>}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="rounded-full  w-60 " src={url} />
+        <Image className="rounded-full  w-60 " src={url} />
 
         <h4 className="font-bold text-3xl  mt-6  text-center">{name}</h4>
         <h4 className="text-xl  mt-2 text-center">{status}</h4>
@@ -141,7 +146,7 @@ const MyProfile = ({ userId }) => {
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-9 rounded-lg">
             {products.map((product) => (
-              <a
+              <Link
                 key={product.moves_id}
                 onClick={() => saveSelectedvideo(product)}
                 href={`/watch/${product.moves_id}`}
@@ -149,7 +154,7 @@ const MyProfile = ({ userId }) => {
                 style={{ backgroundColor: '#343a40' }}
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                  <img
+                  <Image
                     src={product.imageurl}
                     alt={product.name}
                     className="h-72 w-full object-cover object-center group-hover:opacity-75"
@@ -158,7 +163,7 @@ const MyProfile = ({ userId }) => {
                 <h3 className="mt-4 text-white text-center text-lg font-medium mr-auto pb-6">
                   {product.name}
                 </h3>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -172,7 +177,7 @@ export default MyProfile;
 export async function getServerSideProps({ params }) {
   return {
     props: {
-      userId: params.userId,
+      userId: params?.userId || null,
     },
   };
 }

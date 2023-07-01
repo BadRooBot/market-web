@@ -19,6 +19,8 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import 'tailwindcss/tailwind.css';
+import Image from 'next/image';
+import Link from 'next/link';
 
 
 const myLogo='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FOIG-PhotoRoom.png-PhotoRoom.png?alt=media&token=4274e406-53ea-4ce9-8553-ced2826b6d1a';
@@ -135,7 +137,7 @@ export default function Login() {
         */}
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
+            <Image
               className="mx-auto h-40 w-auto"
               src={myLogo}
               alt="Lotus"
@@ -169,9 +171,9 @@ export default function Login() {
                     Password
                   </label>
                   <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    <Link href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="mt-2">
@@ -199,9 +201,9 @@ export default function Login() {
   
             <p className="mt-10 text-center text-sm text-gray-500">
               Not a member?{' '}
-              <a href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              <Link href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                 Start free Now !!
-              </a>
+              </Link>
             </p>
           </div>
         </div>
