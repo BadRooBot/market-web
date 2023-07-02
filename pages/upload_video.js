@@ -47,6 +47,7 @@ const UploadPage = () => {
     event.preventDefault();
     setloading(true)
     if (selectedFile) {
+      console.log('file selected')
       const formData = new FormData();
       formData.append('video', selectedFile);
       try {
@@ -60,6 +61,7 @@ const UploadPage = () => {
           method: 'POST',
           body: formData,
         });
+      console.log('file response')
 
         if (response.ok) {
           const data=await response.json()
