@@ -24,8 +24,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const myLogo='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FOIG-PhotoRoom.png-PhotoRoom.png?alt=media&token=4274e406-53ea-4ce9-8553-ced2826b6d1a';
-const myLogo2='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2F_930c2af4-3948-41c6-b609-9ff668b5edd1-PhotoRoom.png-PhotoRoom.png?alt=media&token=e1389367-bb1b-4209-8b55-2ccd9731725e';
+const myLogo='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/6.png?alt=media&token=8bbe9ed7-233e-4726-bc7a-02624e5c8228';
+const myLogo2='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/square-format%2C-transparent-background-designify.png?alt=media&token=0709d981-374a-4f0f-b455-c3393224469c';
 
 
 export default function AppBar() {
@@ -66,11 +66,15 @@ const router = useRouter();
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <Image
+                    width={100}
+                    height={100}
                     className="block h-12 w-12 rounded-full lg:hidden"
                     src={myLogo2}
                     alt="Black Lotus"
                   />
                   <Image
+                    width={100}
+                    height={100}
                     className="hidden h-12 w-12 rounded-full lg:block"
                     src={myLogo}
                     alt="Black Lotus"
@@ -154,6 +158,9 @@ const router = useRouter();
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <Image
+                              width={100}
+                              height={100}
+
                         className="h-8 w-8 rounded-full"
                         src="https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FDefault_A_hyper_realistic_colorful_cosmic_colored_lotus_flower_0_374e78ba-6fce-4d7c-a4e3-e11fb6c36006_1.jpg?alt=media&token=3b77046f-e410-46bc-b305-1754bbd79e31"
                         alt=""

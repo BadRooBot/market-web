@@ -21,19 +21,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 
-const mylogo=""
+const myLogo='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/6.png?alt=media&token=8bbe9ed7-233e-4726-bc7a-02624e5c8228';
 export default function Signup() {
   const [Iserror, setIserror] = useState(false);
   const cancelButtonRef = useRef(null);
 
   const router = useRouter();
-  const title = 'Login failed';
-  const  text= 'Please check your email and password,If you do not create an account yet creating a new account first';
+  const title = 'Failed to register ';
+  const  text= 'Please double-check your password and email, if you are sure of the email maybe the email is already registered try logging in';
   useEffect(() => {
     const { error } = router.query;
     setIserror(error === '500'); // Use strict comparison
   }, [router.query.error]);
-
+  const { protocol, hostname, port } = window.location;
+  const currentUrl = `${protocol}//${hostname}:${port}`;
     
     return (
 
@@ -50,7 +51,7 @@ export default function Signup() {
               enter="ease-out duration-300"
               enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
+              leave="eas  e-in duration-200"
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
@@ -125,10 +126,12 @@ export default function Signup() {
         */}
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <Image
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
+          <Image
+            width={400}
+            height={400}
+              className="mx-auto h-40 w-auto"
+              src={myLogo}
+              alt="Lotus"
             />
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600">
               Sign Up New account
@@ -136,8 +139,9 @@ export default function Signup() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form  id="login-form" className="space-y-6" action="http://localhost:3000/api/signup" method="POST">
-          
+          <form  id="login-form" className="space-y-6" action={`${API_URL}/signup`} method="POST">
+          <input hidden value={currentUrl} name='xyz'id='xyz'type='text'/>
+
           <div>
                 <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-400">
                   Name
@@ -146,7 +150,7 @@ export default function Signup() {
                   <input
                     id="username"
                     name="username"
-                    type="username"
+                    type="text"
                     autoComplete="username"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

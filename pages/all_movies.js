@@ -137,7 +137,7 @@ export default function AllMovies() {
     console.log('All end')
 
   };
-
+  
   const getCount = async () => {
     const countOfAllMoves = await fetch(
       API_URL+'/get-count',
@@ -181,6 +181,18 @@ export default function AllMovies() {
 
   useEffect(() => {
     try{
+      const databaseVideo=db.currentVideo?.dbDatatosave
+  if(databaseVideo!==undefined){
+    databaseVideo.forEach((x) => {
+   
+     if (!products.some((product) => product.moves_id === x.moves_id)) {
+       products.push(x); // Add the new movie to products
+     }
+   });
+   saveData(products);
+
+
+  }
       getCount();
 
     }catch(e){
@@ -188,6 +200,9 @@ export default function AllMovies() {
     }
     }, []);
 
+
+
+    //UI    //////////////////////
   return (
     <>
       <div style={{ backgroundColor: '#1e2129' }}>
@@ -204,6 +219,8 @@ export default function AllMovies() {
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                   <Image
+                  width={400}
+                  height={400}
                     src={product.imageurl}
                     alt={product.name}
                     className="h-72 w-full object-cover object-center group-hover:opacity-75"

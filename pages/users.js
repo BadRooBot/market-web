@@ -72,10 +72,11 @@ const people = [
   let UsersCount=0;
 
  
-  export default  function Example() {
+  export default   function Example() {
     const dispatch = useDispatch();
     const db = useSelector(state => state.db);
   
+   
     const saveData = (dbDatatosaveusers) => {
       dispatch(saveSelectedUaserData({ dbDatatosaveusers }));
       console.log('db user: ',db)
@@ -142,6 +143,17 @@ const people = [
   
     useEffect(() => {
       try{
+        const databaseUsers=db.currentUser?.dbDatatosaveusers
+    if(databaseUsers!==undefined){
+      databaseUsers.forEach((x) => {
+     
+        if (!people.some((product) => product.id === x.id)) {
+          people.push(x); // Add the new movie to products
+        }
+      });
+      saveData(people);
+    }
+
         getCount();
   
       }catch(e){
@@ -151,6 +163,9 @@ const people = [
     const saveSelected=(UserData)=>{
       dispatch(saveOneUserdata(UserData))
     }
+
+    
+    ///  UI ////////////////
     return (
 < >
 <ul role="list" className=" divide-purple-600 mx-auto max-w-2xl px-4 py-1 sm:px-6 sm:py-2 lg:max-w-7xl lg:px-8" >
@@ -164,7 +179,7 @@ const people = [
    
       <li key={person.email} className="flex justify-between gap-x-6 py-5">
             <div className="flex gap-x-4">
-              <Image  className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
+              <Image  width={2000} height={2000}  className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.image_url} alt="" />
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-100">{person.username}</p>
                 <p  className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>

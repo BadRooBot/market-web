@@ -27,11 +27,13 @@ export const dbSlice = createSlice({
       state.selectedUser=action.payload
      },
     loadVideoSuccess: (state,action) => {
+      state.currentVideo=null
+
      state.loading=false
      state.currentVideo=action.payload
     },
     saveSelectedUaserData: (state,action) => {
-      //state.currentUser=null
+      state.currentUser=null
       state.loading=false
       state.currentUser=action.payload
      },

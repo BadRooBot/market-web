@@ -21,13 +21,15 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import 'tailwindcss/tailwind.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import {API_URL} from'@/myenv'
 
 
-const myLogo='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FOIG-PhotoRoom.png-PhotoRoom.png?alt=media&token=4274e406-53ea-4ce9-8553-ced2826b6d1a';
 
-const myLogo2='https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2F_930c2af4-3948-41c6-b609-9ff668b5edd1-PhotoRoom.png-PhotoRoom.png?alt=media&token=e1389367-bb1b-4209-8b55-2ccd9731725e';
+const myLogo='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/square-format%2C-transparent-background-designify.png?alt=media&token=0709d981-374a-4f0f-b455-c3393224469c';
+
 export default function Login() {
-
+  const { protocol, hostname, port } = window.location;
+  const currentUrl = `${protocol}//${hostname}:${port}`;
   const [Iserror, setIserror] = useState(false);
   const cancelButtonRef = useRef(null);
 
@@ -38,8 +40,23 @@ export default function Login() {
     const { error } = router.query;
     setIserror(error === '500'); // Use strict comparison
   }, [router.query.error]);
-  
- 
+
+  const sendDataToServerToLogin=async ()=>{
+    const signup = await fetch(
+      'http://localhost:5000/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'password':password,
+          'email':email,
+        }),
+      }
+    );
+
+  }
   return (
       <>
 
@@ -138,6 +155,8 @@ export default function Login() {
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <Image
+            width={400}
+            height={400}
               className="mx-auto h-40 w-auto"
               src={myLogo}
               alt="Lotus"
@@ -148,11 +167,12 @@ export default function Login() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form  id="login-form" className="space-y-6" action="http://localhost:3000/api/signin" method="POST">
+          <form  id="login-form" className="space-y-6" action={`${API_URL}/login`} headers={{'xyz':currentUrl}} method="POST">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-400">
                   Email address
                 </label>
+                <input hidden value={currentUrl} name='xyz'id='xyz'type='text'/>
                 <div className="mt-2">
                   <input
                     id="email"

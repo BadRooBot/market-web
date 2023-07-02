@@ -1,4 +1,3 @@
-'use client'
 
 import { saveOneUserdata, saveOneVideodata } from "@/slices/dbSlice";
 import { loginSuccess } from "@/slices/userSlice";
@@ -57,15 +56,15 @@ var proMovies = [
 
 
 const MyProfile = ({ userId }) => {
-  const [name, setname] = useState(null);
-  const [url, seturl] = useState(null);
+  const [name, setname] = useState('Dark Lotus');
+  const [url, seturl] = useState('https://src.pcsoft.com.cn/d/file/article/rjjc/syjc/2018-01-12/ae1af02ba65919b0b10d946c31459651.jpg');
 
   const dispatch = useDispatch();
   const StData = userId?.split('user=');
   const myData = useSelector((state) => state.user);
   const myDbData = useSelector((state) => state.db);
   let _userID;
-
+  console.log('ssssss------  ',StData)
   const saveSelectedvideo = (UserData) => {
     dispatch(saveOneVideodata(UserData));
   };
@@ -93,30 +92,30 @@ const MyProfile = ({ userId }) => {
   };
   
   const status='Enjoy your time, life is short'
-  useEffect(() => {
-    function getUserData() {
-      if (StData[1] === 'me') {
-        seturl(myData.currentUser.jsonData.image_url);
-        setname(myData.currentUser?.jsonData.username);
-        _userID = myData.currentUser?.jsonData.id;
+
+  function getUserData() {
+    if (StData[1] === 'me') {
+      seturl(myData.currentUser.jsonData.image_url);
+      setname(myData.currentUser.jsonData.username);
+      _userID = myData.currentUser.jsonData.id;
+    } else {
+      if (myData.currentUser === null) {
+        const jsonData = JSON.parse(decodeURIComponent(StData[1]));
+        dispatch(loginSuccess({ jsonData }));
+        dispatch(saveOneUserdata(jsonData));
+        seturl(jsonData.image_url);
+        setname(jsonData.username);
+        _userID = jsonData.id;
       } else {
-        if (myData.currentUser === null) {
-          const jsonData = JSON.parse(decodeURIComponent(StData[1]));
-          dispatch(loginSuccess({ jsonData }));
-          dispatch(saveOneUserdata(jsonData));
-          seturl(jsonData.image_url);
-          setname(jsonData.username);
-          _userID = jsonData.id;
-        } else {
-          if (myDbData.selectedUser !== null) {
-            seturl(myDbData.selectedUser.image_url);
-            setname(myDbData.selectedUser.username);
-            _userID = myData.selectedUser?.id;
-          }
+        if (myDbData.selectedUser !== null) {
+          seturl(myDbData.selectedUser.image_url);
+          setname(myDbData.selectedUser.username);
+          _userID = myData.selectedUser?.id;
         }
       }
     }
-
+  }
+  useEffect(() => {
     try {
       getUserData();
       getMyPosts(_userID);
@@ -128,7 +127,7 @@ const MyProfile = ({ userId }) => {
   return (
     <Suspense fallback={<h2>loading..</h2>}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  sm:mx-auto sm:w-full sm:max-w-sm">
-        <Image className="rounded-full  w-60 " src={url} />
+      <Image className="rounded-full  w-60 "  width={5000} height={5000} src={url} />
 
         <h4 className="font-bold text-3xl  mt-6  text-center">{name}</h4>
         <h4 className="text-xl  mt-2 text-center">{status}</h4>
@@ -155,6 +154,7 @@ const MyProfile = ({ userId }) => {
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                   <Image
+                   width={2000} height={2000}
                     src={product.imageurl}
                     alt={product.name}
                     className="h-72 w-full object-cover object-center group-hover:opacity-75"
@@ -177,7 +177,7 @@ export default MyProfile;
 export async function getServerSideProps({ params }) {
   return {
     props: {
-      userId: params?.userId || null,
+      userId: params.userId,
     },
   };
 }

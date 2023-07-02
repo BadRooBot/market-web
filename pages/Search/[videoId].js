@@ -69,7 +69,9 @@ export default function SearchVideo({videoId}){
                 style={{ backgroundColor: '#343a40' }}
               >
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                  <Image
+                <Image
+                  width={400}
+                  height={400}
                     src={product.imageurl}
                     alt={product.name}
                     className="h-72 w-full object-cover object-center group-hover:opacity-75"
