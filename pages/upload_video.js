@@ -59,10 +59,6 @@ const UploadPage = () => {
         console.log('name',tags+nameVideo+bio+image+Release_time)
         const response = await fetch(API_URL+'/upload', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json', // Specify the content type of the request body            // Add more headers as needed
-          },
-        
           body: formData,
         });
       console.log('file response')
