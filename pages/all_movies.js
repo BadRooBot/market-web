@@ -172,7 +172,8 @@ export default function AllMovies() {
          saveData(products);
          }
         
-    }
+    
+        }
   };
 
   const saveSelectedvideo = (UserData) => {
@@ -181,6 +182,8 @@ export default function AllMovies() {
 
   useEffect(() => {
     try{
+      getCount();
+
       const databaseVideo=db.currentVideo?.dbDatatosave
   if(databaseVideo!==undefined){
     databaseVideo.forEach((x) => {
@@ -190,11 +193,7 @@ export default function AllMovies() {
      }
    });
    saveData(products);
-
-
   }
-      getCount();
-
     }catch(e){
       console.log('error in get count')
     }
