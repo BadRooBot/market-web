@@ -129,7 +129,7 @@ export default function AllMovies() {
     console.log('All')
     AllMoviesList.forEach((x) => {
       if (!products.some((product) => product.moves_id === x.moves_id)) {
-        products.push(x); // Add the new movie to products
+        products = [...products, x]; // Spread the existing array and add the new movie
       }
     });
     saveData(products);
@@ -165,9 +165,9 @@ export default function AllMovies() {
         const databaseVideo=db.currentVideo?.dbDatatosave
         await  databaseVideo.forEach((x) => {
          
-           if (!products.some((product) => product.moves_id === x.moves_id)) {
-             products.push(x); // Add the new movie to products
-           }
+          if (!products.some((product) => product.moves_id === x.moves_id)) {
+            products = [...products, x]; // Spread the existing array and add the new movie
+          }
          });
          saveData(products);
          }
@@ -187,10 +187,9 @@ export default function AllMovies() {
       const databaseVideo=db.currentVideo?.dbDatatosave
   if(databaseVideo!==undefined){
     databaseVideo.forEach((x) => {
-   
      if (!products.some((product) => product.moves_id === x.moves_id)) {
-       products.push(x); // Add the new movie to products
-     }
+      products = [...products, x]; // Spread the existing array and add the new movie
+    }
    });
    saveData(products);
   }

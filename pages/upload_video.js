@@ -61,7 +61,7 @@ const UploadPage = () => {
           method: 'POST',
           body: formData,
         });
-      console.log('file response')
+         console.log('file response')
 
         if (response.ok) {
           const data=await response.json()

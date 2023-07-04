@@ -97,7 +97,8 @@ const people = [
       console.log('All')
       AllUsersList.forEach((x) => {
         if (!people.some((product) => product.id === x.id)) {
-          people.push(x); // Add the new movie to products
+          people = [...people, x]; // Spread the existing array and add the new movie
+
         }
       });
       saveData(people);
@@ -146,9 +147,10 @@ const people = [
         const databaseUsers=db.currentUser?.dbDatatosaveusers
     if(databaseUsers!==undefined){
       databaseUsers.forEach((x) => {
-     
+        
         if (!people.some((product) => product.id === x.id)) {
-          people.push(x); // Add the new movie to products
+          people = [...people, x]; // Spread the existing array and add the new movie
+
         }
       });
       saveData(people);
