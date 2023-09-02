@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 
-const people = [
+var people = [
     {
       id:'dsdsdsdccccccccccddddddd',
       username: 'Leslie Alexander',

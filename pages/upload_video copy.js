@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { BarLoader } from 'react-spinners';
 import ShowDialog from '@/components/dialog'
 import {API_URL} from'@/myenv'
-import { useRouter } from 'next/navigation';
 
 const UploadPage = () => {
   const override = {
@@ -15,8 +14,8 @@ const UploadPage = () => {
   const userId= useSelector(state=>state.user).currentUser?.jsonData.id;
   console.log(userId)
   const [selectedFile, setSelectedFile] = useState(null);
-  const [showIframe, setShowIframe] = useState(false);
   const [myHtml, setMyHtml] = useState('<h2>ggggggggg</h2>');
+
   const [tags, setTags] = useState([]);
   const [loadinge, setloading] = useState(null);
 
@@ -46,40 +45,13 @@ const UploadPage = () => {
     setSelectedFile(event.target.files[0]);
   };
 
-
-  const handleFrame=(event)=>{
-    console.log('handleFrame')
-    document.getElementById('uploadForm').addEventListener('submit', function (e) {
-      e.preventDefault(); // Prevent the default form submission behavior
-      console.log('uploadForm   submit')
-
-      document.getElementById('progressContainer').style.display = 'block';
-  
-      let progress = 0;
-      const progressBar = document.getElementById('progressBar');
-      const interval = setInterval(function () {
-        progress += 5; // Simulated progress
-        progressBar.style.width = progress + '%';
-  
-        if (progress >= 100) {
-          clearInterval(interval);
-          console.log('video add to VK done')
-           
-          // After the progress bar reaches 100%, redirect to the new page
-          window.location.href = 'https://badroobot.netlify.app/fram_upload';
-        } 
-      }, 600); // Adjust the interval as needed
-      
-    });
-  }
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setloading(true)
-    
-    if (true) {
+    if (selectedFile) {
       console.log('file selected')
+      const formData = new FormData();
+      formData.append('video', selectedFile);
       try {
         const nameVideo=document.getElementById('inputName').value;
         const bio=document.getElementById('inBio').value;
@@ -88,22 +60,33 @@ const UploadPage = () => {
         const tags=document.getElementById('inTags').value;
         console.log('name',tags+nameVideo+bio+image+Release_time)
         const response = await fetch(API_URL+'/upload', {
-          method: 'POST', headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({'name':nameVideo,'bio':bio,'imageUrl':image,'release_time':Release_time,'tag':tags,'publisherID':userId}),
+          method: 'POST',
+          body: formData,
         });
-         
-      if (response.ok) {
-        const htmlContent = await response.text();
-        setMyHtml(htmlContent);
-        setShowIframe(!showIframe);
-        setloading(false)
-      } else {
-        // Handle error response
-        console.error('Upload failed!');
-        setloading(false)
-      }
+         console.log('file response')
+
+        if (response.ok) {
+          const data=await response.json()
+          // File uploaded successfully
+          console.log('File uploaded!',data);
+          const videoUrl=data.videourl
+          const bodyJSON={'publisherID':userId,'owner_id':`${data.success.ownerId}`,'video_id':data.success.id,'name':nameVideo, 'videoUrl':videoUrl, 'bio':bio,'imageUrl':image, 'release_time':`${Release_time}`,'tag':  tags.split(',')};
+          if(videoUrl!==undefined||videoUrl!==null){
+            fetch(API_URL+'/addMoves',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bodyJSON),
+          })
+          }
+          setloading(false)
+
+        } else {
+          // Handle error response
+          console.error('Upload failed!');
+          setloading(false)
+        }
       } catch (error) {
         // Handle fetch error
         setloading(false)
@@ -125,7 +108,16 @@ const UploadPage = () => {
       />
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
       <h1 className='mb-16 text-4xl text-center font-bold text-blue-600'>Upload Video</h1>
-      {!showIframe && ( <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-3">
+              <div >
+                <label htmlFor="inFile" className="block text-sm font-medium leading-6 text-gray-400">
+                  select File
+                </label>
+                <div className="mt-2">
+        <input type="file" name='inFile' id='inFile' accept="video/*" onChange={handleFileChange} className='text-gray-200 rounded-lg me-1 ms-1 bg-black flex w-full'/>
+                 
+                </div>
+              </div>
               <div >
                 <label htmlFor="inputName" className="block text-sm font-medium leading-6 text-gray-400">
                 Movie Name
@@ -190,41 +182,14 @@ const UploadPage = () => {
                 >
                   Upload
                 </button>
-                      </form>)}
-                      {showIframe && (
-              <iframe
-  title="HTML Frame"
-  onLoad={() => {
-    console.log('handleFrame');
-    const MyTime = setInterval(function () {
-    document.addEventListener('DOMContentLoaded', function () {
-    console.log('bodyy',document.body)
-    document.body.addEventListener('submit', function (e) {
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa')
-
-    if (e.target.id === 'uploadForm') {
-      e.preventDefault();
-      // Your form handling code here
-        console.log('ggggggggggggggggggggggggggggggggggggg')
-    }
-  });
-});
-
-    
-    }, 200);
-  }}
-  srcDoc={myHtml} // Set the HTML content as the srcDoc
-  style={{ width: '100%', height: '400px' }}
-></iframe>
-
-            )}
-
+                      </form>
       </div>
       <input type='color' onChange={handleColorChange}/>
     </div>
     ):
+    
     <ShowDialog title="Error!!" text="You cannot download videos before logging in, click OK to go login" />
-    }
+}
     </>
   );
 };
