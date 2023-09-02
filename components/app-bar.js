@@ -15,7 +15,7 @@ const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'users', href: '/users', current: false },
   { name: 'All Movies', href: '/all_movies', current: false },
-  { name: 'Upload Video', href: '/upload_video', current: false },
+  { name: 'Upload Video', href: '/fram_upload', current: false },
   { name: 'login', href: '/login', current: false },
 ]
 

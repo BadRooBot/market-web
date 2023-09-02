@@ -21,7 +21,7 @@ const FrameUpload = () => {
   const ds = async () => {
     console.log('ds')
    
-    const dataUrl = await fetch("http://localhost:5000/upload", {
+    const dataUrl = await fetch(API_URL+"/upload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
