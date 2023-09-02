@@ -43,7 +43,7 @@ export default function Login() {
 
   const sendDataToServerToLogin=async ()=>{
     const signup = await fetch(
-      'http://localhost:5000/login',
+      API_URL+'/login',
       {
         method: 'POST',
         headers: {
@@ -167,7 +167,7 @@ export default function Login() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form  id="login-form" className="space-y-6" action={`${API_URL}/login`} headers={{'xyz':currentUrl}} method="POST">
+          <form  id="login-form" className="space-y-6" action={ API_URL+'/login'} headers={{'xyz':currentUrl}} method="POST">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-400">
                   Email address
