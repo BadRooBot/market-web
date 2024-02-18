@@ -9,11 +9,10 @@ export default function Index() {
         <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
           <div className="sm:max-w-lg">
             <h1 className="font text-4xl font-bold tracking-tight text-indigo-700  sm:text-6xl">
-              Summer styles are finally here
+            Welcome to Dark Movies
             </h1>
             <p className="mt-4 text-xl text-gray-500">
-              This year, our new summer collection will shelter you from the harsh elements of a world that doesn&apos;t care
-              if you live or die.
+             the ultimate website for stream movies that will keep you on the edge of your seat. Whether you love horror, thriller, mystery, or suspense, we have something for you. Browse our collection of movies from all over the world, and enjoy them in high quality and with no ads. Dark Movies is more than just a website, it's a community of fans who share their passion for cinema. Join us today and discover the dark side of movies.
             </p>
           </div>
           <div>

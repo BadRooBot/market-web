@@ -8,41 +8,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 var proMovies = [
-  {
-    "name": "A B O S H E R Ix F",
-    "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239101&hash=c7631ed2d84cc0ad&__ref=vk.android&api_hash=1688092869d43768e898d75f177b_HAYDKOBXGI2DGMQ",
-    "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
-    "imageurl": "https://th.bing.com/th/id/OIP.7Z4AZIQW34k4LhHea-YJFgHaMQ?pid=ImgDet&rs=1",
-    "release_time": "3232-02-23",
-    "moves_id": 20,
-    
-    "tag": [
-    "new"
-    ],
-    
-    "publisher_id": null
-    },
-    {
-      "name": "No marcy",
-      "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239103&hash=030dc9e309657da2&__ref=vk.android&api_hash=1688120557d730b799495074c6c5_HAYDKOBXGI2DGMQ",
-      "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
-      "imageurl": "https://cdn.max-c.com/heybox/dailynews/img/5eba1b13e8efc5b0d0425cf72e2fec2b.png?imageMogr2/format/jpg",
-      "release_time": "2000-05-08",
-      "moves_id": 21,
-      
-      "tag": [
-      "new"
-      ],
-      
-      "publisher_id": null
-      },  
+  
       {
-        "name": "Ant-Man and the Wasp: Quantumania 2023",
+        "name": "Black lotus ai",
         "videourl": "https://vk.com/video_ext.php?oid=-220957447&id=456239111&hash=6125cb94afca417b&__ref=vk.android&api_hash=1688225005c20514804e72553137_HAYDKOBXGI2DGMQ",
         "bio": "Land Zombie is a 2023 American horror film directed by George A. Romero and starring Simon Pegg, Nick Frost, and Emma Stone. The film follows a group of survivors who try to escape from a zombie-infested city that has been quarantined by the military. The film is a sequel to the 2004 film Shaun of the Dead and the third installment in Romero's Living Dead series. The film combines elements of comedy, satire, and social commentary, as it explores themes such as consumerism, media manipulation, and human nature in the face of a zombie apocalypse. The film received critical acclaim for its witty script, clever homages to previous zombie films, and its balance of horror and humor. The film was also a commercial success, grossing over $300 million worldwide and becoming one of the highest-grossing zombie films of all time.",
         "imageurl": "https://src.pcsoft.com.cn/d/file/article/rjjc/syjc/2018-01-12/ae1af02ba65919b0b10d946c31459651.jpg",
         "release_time": "2013-03-03",
-        "moves_id": 26,
+        "moves_id": 0,
         
         "tag": [
         "new"
