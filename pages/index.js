@@ -12,7 +12,7 @@ export default function Index() {
             Welcome to Dark Movies
             </h1>
             <p className="mt-4 text-xl text-gray-500">
-             the ultimate website for stream movies that will keep you on the edge of your seat. Whether you love horror, thriller, mystery, or suspense, we have something for you. Browse our collection of movies from all over the world, and enjoy them in high quality and with no ads. Dark Movies is more than just a website, it's a community of fans who share their passion for cinema. Join us today and discover the dark side of movies.
+             the ultimate website for stream movies that will keep you on the edge of your seat. Whether you love horror, thriller, mystery, or suspense, we have something for you. Browse our collection of movies from all over the world, and enjoy them in high quality and with no ads. Dark Movies is more than just a website, it&apos;s a community of fans who share their passion for cinema. Join us today and discover the dark side of movies.
             </p>
           </div>
           <div>
