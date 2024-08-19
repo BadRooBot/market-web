@@ -1,224 +1,179 @@
-'use client';
-import { usePathname } from 'next/navigation'
-import { Disclosure, Menu,Transition } from '@headlessui/react'  
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { logout } from '@/slices/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteAll } from '@/slices/dbSlice';
-import { useState } from 'react';
-import SearchView from '@/components/search_View'
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../slices/userSlice';
+import { deleteAll } from '../slices/dbSlice';
+import { deleteAllItemCar, setCartOpen } from '@/slices/cartSlice';
+import { useRouter } from 'next/router';
+import { Disclosure, Menu } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import{APPNAME}from '@/myenv.js';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
-  { name: 'users', href: '/users', current: false },
-  { name: 'All Movies', href: '/all_movies', current: false },
-  { name: 'Upload Video', href: '/fram_upload', current: false },
-  { name: 'login', href: '/login', current: false },
-]
-
+  { name: 'Market', href: '/product', current: false },
+  // { name: 'Info v2', href: '/info-test/2', current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
-const myLogo='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/6.png?alt=media&token=8bbe9ed7-233e-4726-bc7a-02624e5c8228';
-const myLogo2='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/square-format%2C-transparent-background-designify.png?alt=media&token=0709d981-374a-4f0f-b455-c3393224469c';
-
-
-export default function AppBar() {
+export default function AppBar({onClickDark}) {
   const dispatch = useDispatch();
-  const userLogout=()=>{   
-    dispatch(logout())
-    dispatch(deleteAll())
-  }
-  const myData = useSelector(state=>state.user);
-  const isLoggedIn=  myData.IsLogin;
-  if(isLoggedIn){
-   // navigation.splice(3,1)
-  
-  
-  }
-  
-const [searchQuery, setSearchQuery] = useState('');
-const router = useRouter();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [mounted, setMounted] = useState(false);
+  const myData = useSelector(state => state.user);
+  const isLoggedIn = myData.IsLogin;
+  const { items, isOpen } = useSelector((state) => state.cart);
+  const [theme, setTheme] = useState('light');
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const userLogout = () => {
+    if (isLoggedIn) {
+      dispatch(logout());
+      dispatch(deleteAll());
+      dispatch(deleteAllItemCar());
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    router.push(`/product/${searchQuery}`);
+  };
+
+  if (!mounted) {
+    return null;
+  }
+  
+  const toggleTheme = () => {
+    const oldThme=localStorage.getItem('theme');
+    const newTheme = oldThme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    onClickDark(newTheme)
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="top-0 bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-teal-600 dark:selection:text-white ">
+       
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
+          <div className="relative flex items-center justify-between p-4 lg:px-6 ">
+            <div className="block flex-none md:hidden">
+              <Disclosure.Button className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white">
+                {open ? (
+                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </Disclosure.Button>
+            </div>
+            <div className="flex w-full items-center">
+              <div className="flex w-full md:w-1/3">
+                <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
+                  <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block "><h2>{APPNAME}</h2></div>
+                </Link>
+                <ul className="hidden gap-6 text-sm md:flex md:items-center">
+                  {/* <li><Link href="/all_movies" className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300">Market</Link></li> */}
+                  <li><Link href="/product" className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300">Market</Link></li>
+                  <li><Link  onClick={isLoggedIn ? userLogout : undefined} href="/login" className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300">{ isLoggedIn?'logout':'login'}</Link></li>
+                </ul>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    width={100}
-                    height={100}
-                    className="block h-12 w-12 rounded-full lg:hidden"
-                    src={myLogo2}
-                    alt="Black Lotus"
+              
+              <div className="hidden justify-center md:flex md:w-1/3">
+                <form onSubmit={handleSearch} className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
+                  <input 
+                    type="text" 
+                    placeholder="Search for products..." 
+                    autoComplete="off" 
+                    className="text-md w-full rounded-lg border bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-sm dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400" 
+                    name="search" 
+                    value={searchQuery} 
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <Image
-                    width={100}
-                    height={100}
-                    className="hidden h-12 w-12 rounded-full lg:block"
-                    src={myLogo}
-                    alt="Black Lotus"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4 ">
-                    {navigation.map((item) => ( 
-                      <Link
-                     
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-6 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </Link>
-                    ))
+                  <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+                    </svg>
+                  </div>
+                </form>
+              </div>
+            
+              <div className="flex justify-end md:w-1/3">
+              <button
+            onClick={toggleTheme}
+            className="  text-white p-2 rounded-full shadow-lg text-xl"
+          >
+            {localStorage.getItem('theme') === 'light' ? '🌙 ' : ' 🌞 '}
+          </button>
+                <button onClick={() => dispatch(setCartOpen(!isOpen))} aria-label="Open cart">
+                  <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4 transition-all ease-in-out hover:scale-110">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"></path>
+                    </svg>
                     
-                    }
+                    {items.length > 0 && <div className="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white animate-bounce">{items.length}</div>}
                   </div>
-                </div>
-              </div>
-              <div className="relative flex items-center">
-              <input
-        type="search"
-        value={searchQuery}
-        onChange={(e) => 
-          {
-            setSearchQuery(e.target.value)
-           
-          
-          }
-          
-        }
-        onKeyDown={(e)=>{
-          if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent the default behavior of the Enter key
-            const inputValue = e.target.value;
-            console.log(inputValue)
-            //go to new page
-            router.push(`/Search/${inputValue}`);
-
-          }
-      
-        }}
-        className=" border-indigo-800 peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-        id="exampleSearch2"
-        placeholder="Type query" />
-      <label
-        htmlFor="exampleSearch2"
-        className=" pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-        >
-          {
-           searchQuery==''? 'Search':''
-          }
-          </label>
-    </div>
-
-    <div className="snap-y absolute overflow-visible right-[8%] top-14 mb-0 max-w-[90%] origin-[0_0]  pt-[0.37rem]  bg-black">
-    {/* <SearchView  style={{width:open?'26%':'40%'}}  /> */}
-      </div>
-
-   
-
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <Image
-                              width={100}
-                              height={100}
-
-                        className="h-8 w-8 rounded-full"
-                        src="https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FDefault_A_hyper_realistic_colorful_cosmic_colored_lotus_flower_0_374e78ba-6fce-4d7c-a4e3-e11fb6c36006_1.jpg?alt=media&token=3b77046f-e410-46bc-b305-1754bbd79e31"
-                        alt=""
-                      />
-                    </Menu.Button>  
-                  </div>
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item className={isLoggedIn?'visible':'hidden'}>
-                        {({ active }) => (
-                          <Link
-                            href="/profile/user=me"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Your Profile
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                          onClick={
-                            userLogout
-                                            }
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                           
-                            </Link>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-          
-                </Menu>
               </div>
+              {/* Profile dropdown */}
+              <Menu as="div" className=" relative ml-3">
+                <div>
+                  <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <span className="sr-only">Open user menu</span>
+                    <Image
+                      width={32}
+                      height={32}
+                      className="h-8 w-8 rounded-full"
+                      src="https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FDefault_A_hyper_realistic_colorful_cosmic_colored_lotus_flower_0_374e78ba-6fce-4d7c-a4e3-e11fb6c36006_1.jpg?alt=media&token=3b77046f-e410-46bc-b305-1754bbd79e31"
+                      alt=""
+                    />
+                  </Menu.Button>  
+                </div>
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  {isLoggedIn && (
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link href="/profile/user=me" className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
+                          Your Profile
+                        </Link>
+                      )}
+                    </Menu.Item>
+                  )}
+                  
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href={isLoggedIn ? '/' : '/login'}
+                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                        onClick={isLoggedIn ? userLogout : undefined}
+                      >
+                        {isLoggedIn ? 'Sign out' : 'Login'}
+                      </Link>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
+              </Menu>
+             
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              
+          <Disclosure.Panel className="md:hidden">
+            <div className="space-y-1 px-2 pb-3 pt-2 bg-neutral-300  dark:bg-neutral-900 ">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                     'dark:text-gray-300  text-black  hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
@@ -226,13 +181,18 @@ const router = useRouter();
                   {item.name}
                 </Disclosure.Button>
               ))}
-              
+              <Disclosure.Button
+                as="a"
+                href={isLoggedIn ? '#' : '/login'}
+                onClick={isLoggedIn ? userLogout : undefined}
+                className="block rounded-md px-3 py-2 text-base font-medium dark:text-gray-300  text-black hover:bg-gray-700 hover:text-white"
+              >
+                {isLoggedIn ? 'Sign out' : 'Sign in'}
+              </Disclosure.Button>
             </div>
           </Disclosure.Panel>
-        
-
         </>
       )}
     </Disclosure>
-  )
+  );
 }

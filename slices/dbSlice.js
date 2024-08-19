@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dbSlice = createSlice({
   name: 'db',
   initialState: {
-    currentVideo:null,
-    selectedVideo:null,
+    currentProduct:null,
+    selectedProduct:null,
     currentUser:null,
     selectedUser:null,
     loading:false,
     error:false,
-    countOfMovies:0,
+    countOfProduct:0,
     countOfUsers:0
 
   },
@@ -18,19 +18,19 @@ export const dbSlice = createSlice({
         state.loading=true
      
     },
-    saveOneVideodata: (state,action) => {
+    saveOneProductdata: (state,action) => {
       state.loading=false
-      state.selectedVideo=action.payload
+      state.selectedProduct=action.payload
      },
      saveOneUserdata: (state,action) => {
       state.loading=false
       state.selectedUser=action.payload
      },
-    loadVideoSuccess: (state,action) => {
-      state.currentVideo=null
+    loadProductSuccess: (state,action) => {
+      state.currentProduct=null
 
      state.loading=false
-     state.currentVideo=action.payload
+     state.currentProduct=action.payload
     },
     saveSelectedUaserData: (state,action) => {
       state.currentUser=null
@@ -42,17 +42,17 @@ export const dbSlice = createSlice({
         state.error=true
     },
     deleteAll:(state)=>{
-        state.currentVideo=null
+        state.currentProduct=null
         state.currentUser=null
         state.selectedUser=null
-        state.selectedVideo=null
+        state.selectedProduct=null
         state.loading=false
         state.error=false
-        state.countOfMovies=0
+        state.countOfProduct=0
         state.countOfUsers=0
     },
-    moviesCount:(state,action)=>{
-      state.countOfMovies=action.payload
+    productCount:(state,action)=>{
+      state.countOfProduct=action.payload
     },
     usersCount:(state,action)=>{
       state.countOfUsers=action.payload
@@ -61,6 +61,6 @@ export const dbSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { loginStart, loadVideoSuccess,saveSelectedUaserData, loginfailure ,deleteAll,moviesCount,usersCount,saveOneVideodata,saveOneUserdata} = dbSlice.actions
+export const { loginStart, loadProductSuccess,saveSelectedUaserData, loginfailure ,deleteAll,productCount,usersCount,saveOneProductdata,saveOneUserdata} = dbSlice.actions
 
 export default dbSlice.reducer
