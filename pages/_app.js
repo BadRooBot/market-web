@@ -8,6 +8,7 @@ import CartSidebar from '@/components/CartSidebar';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { APPNAME } from '@/myenv.js';
+import Link from 'next/link.js';
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState('light');
@@ -58,57 +59,57 @@ export default function App({ Component, pageProps }) {
             <footer className="text-sm text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900">
               <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
                 <div>
-                  <a className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
+                  <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
                     <span className="uppercase animate-pulse">🏐 {APPNAME}</span>
-                  </a>
+                  </Link>
                 </div>
                 <nav>
                   <ul>
-                    <li><a className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/">Home</a></li>
-                    <li><a className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/about">About</a></li>
-                    <li><a className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/terms-conditions">Terms &amp; Conditions</a></li>
-                    <li><a className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/privacy-policy">Privacy Policy</a></li>
-                    <li><a className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/frequently-asked-questions">FAQ</a></li>
+                    <li><Link className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/">Home</Link></li>
+                    <li><Link className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/about">About</Link></li>
+                    <li><Link className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/terms-conditions">Terms &amp; Conditions</Link></li>
+                    <li><Link className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/privacy-policy">Privacy Policy</Link></li>
+                    <li><Link className="block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300" href="/frequently-asked-questions">FAQ</Link></li>
                   </ul>
                 </nav>
                 <div className="md:ml-auto">
            
             
             <div className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" >
-              <a className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
+              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
               <span className="px-3">⚡</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">Facebook  </span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-              </a>
-              <a className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
+              </Link>
+              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
               <span className="px-3">⚡</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">Whatsapp  </span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-              </a>
+              </Link>
             </div>
             
             <div className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" >
-              <a className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
+              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
               <span className="px-3">⚡</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">instagram  </span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-              </a>
-              <a className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
+              </Link>
+              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
               <span className="px-3">⚡</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">YouTube  </span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-              </a>
+              </Link>
               
             </div>
-            <a className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="https://www.facebook.com/profile.php?id=100078019702613">
+            <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="https://www.facebook.com/profile.php?id=100078019702613">
               <span className="px-3">🛠</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">Developer  </span>
-            </a>
+            </Link>
           </div>
               </div>
               <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">

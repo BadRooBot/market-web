@@ -38,8 +38,9 @@ export default function SearchVideo({ videoId }) {
   };
 
   return (
-    <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white">
-      <div className="order-last min-h-screen w-full md:order-none">
+    <div className="dark:bg-neutral-900">
+    <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white ">
+      <div className="order-last min-h-screen w-full md:order-none p-2">
       {products.length>0?
         <ul className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
           {products.map((product) => (
@@ -54,7 +55,7 @@ export default function SearchVideo({ videoId }) {
                   <Image
                     alt={product.product_name}
                     src={product.imageurl}
-                    layout="fill"
+                    fill
                     objectFit="fill"
                     className="transition duration-300 ease-in-out group-hover:scale-105"
                   />
@@ -74,6 +75,7 @@ export default function SearchVideo({ videoId }) {
         </ul>
         : <h1 className="text-3xl text-center  text-neutral-900 dark:text-white animate-bounce">🏐</h1>}
       </div>
+    </div>
     </div>
   );
 }

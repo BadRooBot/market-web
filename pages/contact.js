@@ -100,7 +100,7 @@ const ContactPage = () => {
             </button>
           </form>
           {submitStatus === 'success' && (
-            <p className="mt-4 text-green-600">Thank you for your message. We'll get back to you soon!</p>
+            <p className="mt-4 text-green-600">Thank you for your message. We&apos;ll get back to you soon!</p>
           )}
           {submitStatus === 'error' && (
             <p className="mt-4 text-red-600">There was an error sending your message. Please try again later.</p>

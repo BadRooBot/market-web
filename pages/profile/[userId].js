@@ -213,7 +213,7 @@ const MyProfile = ({ userId }) => {
               <ul className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {
                 filteredData?.map((product,i) => (
-                  <li className="aspect-square transition-opacity animate-fadeIn">
+                  <li className="aspect-square transition-opacity animate-fadeIn" key={product.product_id}>
                   <Link key={product.product_id}
                       onClick={() => saveSelectedvideo(product)}
                       href={`/info/${product.product_id}`} className="relative inline-block h-full w-full">

@@ -37,7 +37,7 @@ const PrivacyPolicyPage = () => {
       <ul className="list-disc list-inside mb-4">
         <li>Process and fulfill your orders</li>
         <li>Communicate with you about your order or account</li>
-        <li>Send you marketing communications (if you've opted in)</li>
+        <li>Send you marketing communications (if you&apos;ve opted in)</li>
         <li>Improve our website and customer service</li>
         <li>Comply with legal obligations</li>
       </ul>
@@ -73,7 +73,7 @@ const PrivacyPolicyPage = () => {
 
       <h2 className="text-2xl font-semibold mt-6 mb-4">7. Changes to This Policy</h2>
       <p className="mb-4">
-        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &#34;Last updated&#34; date.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-4">8. Contact Us</h2>

@@ -217,7 +217,7 @@ AllProductData(coll,sort,pageNumber)
       <div className="order-last min-h-screen w-full md:order-none">
       {currentItems.length>0? <ul className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {currentItems.map((product,i) => (
-          <li className="aspect-square transition-opacity animate-fadeIn">
+          <li className="aspect-square transition-opacity animate-fadeIn" key={product.product_id}>
             <Link key={product.product_id}
                 onClick={() => saveSelectedvideo(product)}
                 href={`/info/${product.product_id}`} className="relative inline-block h-full w-full">
@@ -225,7 +225,7 @@ AllProductData(coll,sort,pageNumber)
                 <Image
                   alt={product.product_name}
                   src={product.imageurl}
-                  layout="fill"
+                  fill
                   objectFit="fill"//"contain"
                   className="transition duration-300 ease-in-out group-hover:scale-105"
                 />

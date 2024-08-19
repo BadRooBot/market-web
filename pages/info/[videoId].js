@@ -83,6 +83,7 @@ const Watch = ({ videoId }) => {
                     alt={video?.product_name || "Product Image"}
                     src={images[currentImageIndex] || "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"}
                     layout="fill"
+
                     objectFit="fill"
                     priority
                   />

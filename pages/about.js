@@ -7,10 +7,7 @@ const AboutPage = () => {
     <div className='bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900  dark:selection:bg-teal-600 dark:selection:text-white dark:text-white'>
 
     <div className="container mx-auto px-4 py-8">
-      {/* <Head>
-        <title>About Us - Crochet & Macrame Creations</title>
-        <meta name="description" content="Learn about our passion for handmade crochet bags and macrame art." />
-      </Head> */}
+     
 
       <h1 className="text-3xl font-bold mb-6">About Our Craft</h1>
       
@@ -21,7 +18,7 @@ const AboutPage = () => {
             Welcome to our world of handcrafted beauty! We are passionate artisans dedicated to creating unique crochet bags and stunning macrame pieces. Our journey began in 2018 when we discovered the joy of transforming simple threads into works of art.
           </p>
           <p>
-            Each item in our collection is lovingly made by hand, ensuring quality, uniqueness, and attention to detail that machine-made products simply can't match.
+            Each item in our collection is lovingly made by hand, ensuring quality, uniqueness, and attention to detail that machine-made products simply can&apos;t match.
           </p>
         </div>
         <div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +81,7 @@ const FAQPage = () => {
       </div>
 
       <p className="mt-8 text-gray-400">
-        Can't find the answer you're looking for? Feel free to <a href="/contact" className="text-blue-600 hover:underline">contact us</a> for more information.
+        Can&apos;t find the answer you&apos;re looking for? Feel free to <Link href="/contact" className="text-blue-600 hover:underline">contact us</Link> for more information.
       </p>
     </div>
     </div>
