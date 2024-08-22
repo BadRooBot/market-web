@@ -132,7 +132,7 @@ export default function AppBar({onClickDark}) {
                       width={32}
                       height={32}
                       className="h-8 w-8 rounded-full"
-                      src="https://firebasestorage.googleapis.com/v0/b/legend-badroobot.appspot.com/o/new%2FDefault_A_hyper_realistic_colorful_cosmic_colored_lotus_flower_0_374e78ba-6fce-4d7c-a4e3-e11fb6c36006_1.jpg?alt=media&token=3b77046f-e410-46bc-b305-1754bbd79e31"
+                      src="https://i.imgur.com/4AyCEMf.jpeg"
                       alt=""
                     />
                   </Menu.Button>  
