@@ -13,7 +13,7 @@ const nextConfig = {
   output: 'export',
 
   // distDir: 'build', // Specify the desired output folder name
-  output: 'out',
+  output: 'export',
 
 
 }
