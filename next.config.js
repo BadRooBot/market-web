@@ -12,6 +12,7 @@ const nextConfig = {
   },
 
   // distDir: 'build', // Specify the desired output folder name
+  output: 'out',
 
 
 }
