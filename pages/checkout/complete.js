@@ -36,7 +36,7 @@ const saveOrderInServer=async(getOrderId,createdAt)=>{
         },body: JSON.stringify( {"orderId":getOrderId,"created_at":createdAt}),
       }
     );
-    console.log('get_order',get_order.body)
+    //console.log('get_order',get_order.body)
     if(get_order.status==500){
       setBadyText(`Your order is not available. Make sure to complete the payment process and try again. If you have already paid, send us this number ${getOrderId}. This is your order number. Send it to us on WhatsApp or Facebook. We will review your order as soon as possible. Thank you for using our site.`)
 

@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
   const getPageTitle = () => {
     const path = router.pathname;
     const titles = {
-      '/': {'name':'Home','bio':'Our home handmade crochet bags and macrame art'},
+      '/': {'name':'','bio':'Our home handmade crochet bags and macrame art'},
       '/checkout/start': {'name':'checkout','bio':'Our checkout handmade crochet bags and macrame art'},
       '/about': {'name':'About Us','bio':'Learn about our passion for handmade crochet bags and macrame art.'},
       '/terms-conditions': {'name':'Terms & Conditions','bio':'Terms and conditions for purchasing our handmade crochet bags and macrame art.'},
@@ -76,7 +76,7 @@ export default function App({ Component, pageProps }) {
            
             
             <div className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" >
-              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="#">
+              <Link className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white" aria-label="Deploy " href="https://www.facebook.com/7anddesigner">
               <span className="px-3">⚡</span>
               <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
               <span className="px-3">Facebook  </span>

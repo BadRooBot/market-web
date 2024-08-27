@@ -31,7 +31,7 @@ const MyProfile = ({ userId }) => {
   
   
   let _userID;
-  console.log('ssssss------  ',StData)
+  //console.log('ssssss------  ',StData)
   const saveSelectedvideo = (UserData) => {
     dispatch(saveOneProductdata(UserData));
   };
@@ -39,7 +39,7 @@ const MyProfile = ({ userId }) => {
   const getMyOrder = async (id) => {
     setIsOpen(true)
     try {
-      console.log(id);
+      //console.log(id);
       const response = await fetch(API_URL+'/user/handle/get-all-order-for-user', {
         method: 'POST',
         headers: {
@@ -62,7 +62,7 @@ const MyProfile = ({ userId }) => {
       await AllProductData(allIds)
 
     } catch (error) {
-      console.log('Error: ', error);
+      //console.log('Error: ', error);
     }
   };
 
@@ -96,7 +96,7 @@ const MyProfile = ({ userId }) => {
       _userID = myData.currentUser.jsonData.user_id;
       setProducts(myOrder_db.myOrder)
       product_info= myOrder_db.myProduct;
-      console.log('info',myOrder_db)
+      //console.log('info',myOrder_db)
       if(StData[0] ==="success=true&"){
         getMyOrder(_userID)
         dispatch(deleteAllOrder());
@@ -131,7 +131,7 @@ const MyProfile = ({ userId }) => {
     setSelectedCard(id);
     const data = product_info.filter((item,i) => products[index].product_id.includes(item.product_id));
     setFilteredData(data)
-    console.log('Selected card:', data);
+    //console.log('Selected card:', data);
   };
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const MyProfile = ({ userId }) => {
   getUserData();
 
     } catch (e) {
-      console.log('error in get count users', e);
+      //console.log('error in get count users', e);
     }
   }, []);
 
@@ -149,7 +149,9 @@ const MyProfile = ({ userId }) => {
     <button
       onClick={async () =>{
         
-        console.log('id=',filteredData) ; onSelect(id)}}
+        //console.log('id=',filteredData) ; onSelect(id)
+        }
+        }
       className={`min-w-[250px] items-center  justify-center p-4 border rounded-lg transition-colors ${
         isSelected ? 'border-blue-500  ' : 'border-black dark:border-gray-200 hover:bg-slate-500'
       }`}

@@ -14,7 +14,7 @@ export default function ShoppingCart() {
   const [mounted, setMounted] = useState(false)
   const myData = useSelector((state) => state.user);
 
-  console.log(items)
+  //console.log(items)
   useEffect(() => {
     setMounted(true)
   }, [])

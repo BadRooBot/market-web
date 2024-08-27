@@ -12,19 +12,19 @@ const relatedProducts = [
     product_id: 1,
     product_name: 'BadRooBot',
     product_price: 10.20,
-    product_bio: 'test bio',
-    imageurl: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-05.jpg',
-    additionalImages: [
-      'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-      'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-      'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+    product_bio: '     ',
+    imageurl: 'https://i.imgur.com/z62q52V.jpeg',
+    additional_images: [
+      'https://i.imgur.com/4595fj7.jpeg',
+      'https://i.imgur.com/eYIYsPt.jpeg',
+      'https://i.imgur.com/WcXDRjj.jpeg',
+      'https://i.imgur.com/nt0Iy27.jpeg',
     ],
-    release_time: "8/5/2000",
+    release_time: "8/5/2024",
     product_colors:['When confirming the order, the colors will be chosen'],
-    tag: ['best']
+    tag: ['bag']
   },
   
-  // ... other products
 ];
 
 const Watch = ({ videoId }) => {
@@ -41,7 +41,7 @@ const Watch = ({ videoId }) => {
 
 
   const images =video ? [video.imageurl, ...(video.additional_images || [])] : relatedProducts[0].additionalImages;// 
-  console.log(video)
+  //console.log(video)
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [colorName, setColorName] = useState('');
 
@@ -84,8 +84,8 @@ const Watch = ({ videoId }) => {
                     src={images[currentImageIndex] || "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"}
                     layout="fill"
 
-                    objectFit="fill"
                     priority
+                    className="object-contain"
                   />
                   <div className="absolute bottom-[1%] flex w-full justify-center">
                     <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
@@ -115,7 +115,7 @@ const Watch = ({ videoId }) => {
                             width={80}
                             height={80}
                             objectFit="fill"
-                            className="relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105"
+                            className="relative h-full w-full object-cover transition duration-300 ease-in-out group-hover:scale-105"
                           />
                         </div>
                       </button>
@@ -131,7 +131,7 @@ const Watch = ({ videoId }) => {
                   <p>${video?.product_price}<span className="ml-1 inline">EGP</span></p>
                 </div>
               </div>
-                <dl className="mb-8">
+                {/* <dl className="mb-8">
                   <dt className="mb-4 text-sm uppercase tracking-wide">Color</dt>
                   <dd className="flex flex-wrap gap-3">
                     {video?.product_colors.map((color) => (
@@ -148,9 +148,9 @@ const Watch = ({ videoId }) => {
                       </button>
                     ))}
                   </dd>
-                </dl>
+                </dl> */}
              
-              <div className="prose mx-auto max-w-6xl text-base leading-7 text-black prose-headings:mt-8 prose-headings:font-semibold prose-headings:tracking-wide prose-headings:text-black prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-a:text-black prose-a:underline hover:prose-a:text-neutral-300 prose-strong:text-black prose-ol:mt-8 prose-ol:list-decimal prose-ol:pl-6 prose-ul:mt-8 prose-ul:list-disc prose-ul:pl-6 dark:text-white dark:prose-headings:text-white dark:prose-a:text-white dark:prose-strong:text-white mb-6 text-sm leading-tight dark:text-white/[60%]">
+              <div className="prose mx-auto max-w-6xl  text-black prose-headings:mt-8 prose-headings:font-semibold prose-headings:tracking-wide prose-headings:text-black prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-a:text-black prose-a:underline hover:prose-a:text-neutral-300 prose-strong:text-black prose-ol:mt-8 prose-ol:list-decimal prose-ol:pl-6 prose-ul:mt-8 prose-ul:list-disc prose-ul:pl-6 dark:text-white dark:prose-headings:text-white dark:prose-a:text-white dark:prose-strong:text-white mb-6 text-sm leading-tight dark:text-white/[60%]">
                 {video?.product_bio}
               </div>
               <form onSubmit={(e) => {
@@ -186,7 +186,7 @@ key={product.id} className="relative h-full w-full">
                         alt={product.product_name}
                         src={product.imageurl}
                         layout="fill"
-                        objectFit="contain"
+                        objectFit="cover"
                         className="relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105"
                         sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
                       />
@@ -195,7 +195,7 @@ key={product.id} className="relative h-full w-full">
                           <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">{product.product_name}</h3>
                           <p className="flex-none rounded-full bg-blue-600 p-2 text-white">
                             {product.product_price.toFixed(2)} L.E
-                            <span className="ml-1 inline hidden @[275px]/label:inline">EGP</span>
+                            <span className="ml-1 inline">EGP</span>
                           </p>
                         </div>
                       </div>

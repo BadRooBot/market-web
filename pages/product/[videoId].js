@@ -15,7 +15,7 @@ export default function SearchVideo({ videoId }) {
 
   const getSearchResult = async (id) => {
     try {
-      console.log('id', id);
+      //console.log('id', id);
 
       const response = await fetch(`${API_URL}/user/handle/get-products-from-name`, {
         method: 'POST',
@@ -27,9 +27,9 @@ export default function SearchVideo({ videoId }) {
 
       const result = await response.json();
       setProducts(result);
-      console.log('result', result);
+      //console.log('result', result);
     } catch (error) {
-      console.log('Error: ', error);
+      //console.log('Error: ', error);
     }
   };
 
@@ -64,7 +64,7 @@ export default function SearchVideo({ videoId }) {
                       <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">{product.product_name}</h3>
                       <p className="flex-none rounded-full bg-blue-600 p-2 text-white">
                         {product.product_price}
-                        <span className="ml-1 inline hidden @[275px]/label:inline">EGP</span>
+                        <span className="ml-1 inline ">EGP</span>
                       </p>
                     </div>
                   </div>

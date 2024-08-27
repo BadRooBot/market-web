@@ -30,7 +30,7 @@ export default function InformationForm({ nextStep, updateFormData,data }) {
       nextStep();
     };
     const changreEmail_me=(val)=>{
-      console.log('val =========',val)
+      //console.log('val =========',val)
       val=='on'?'':'on'
       setEmail_me(val)
     }

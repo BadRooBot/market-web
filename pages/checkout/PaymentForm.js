@@ -5,7 +5,7 @@ import axios from 'axios';
 import {API_URL} from'@/myenv'
 
 export default function PaymentForm({ prevStep, updateFormData, submitForm, data }) {
-  console.log('data',data)
+  //console.log('data',data)
   const [selectedCard, setSelectedCard] = useState('mobile_wallet');
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function PaymentForm({ prevStep, updateFormData, submitForm, data
 
   const handleCardSelect = (id) => {
     setSelectedCard(id);
-    console.log('Selected card:', id);
+    //console.log('Selected card:', id);
   };
 
   const onPayClick=async()=>{
@@ -31,7 +31,7 @@ export default function PaymentForm({ prevStep, updateFormData, submitForm, data
         payment_method:selectedCard,email:data.email,name:data.name,addr:data.address,city:data.city
       });
       // Redirect to Paymob's payment page
-      console.log(response.data)
+      //console.log(response.data)
       if(response.status==204){
         setBadyText('Your payment information is incorrect, please review your information and try again.');
       setIsOpen(true);

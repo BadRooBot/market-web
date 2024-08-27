@@ -43,7 +43,6 @@ const ProductPage = () => {
   };
 
   const AllProductData = async (coll,sort,) => {
-    console.log('productLimit ',pg)
     let AllProductList = [];
     const getMoves = await fetch(
       API_URL+'/user/handle/get-products',
@@ -57,7 +56,7 @@ const ProductPage = () => {
       }
     );
     AllProductList = await getMoves.json();
-    // console.log('All',AllProductList)
+    // //console.log('All',AllProductList)
     await AllProductList.forEach((x) => {
       if (!products.some((product) => product.product_id === x.product_id)) {
         products = [...products, x]; // Spread the existing array and add the new movie
@@ -66,7 +65,7 @@ const ProductPage = () => {
     _productCount=products.length;
     saveData(products);
     dispatch(productCount(_productCount));
-    console.log('All end')
+    // //console.log('All end')
 
   };
   
@@ -82,17 +81,17 @@ const ProductPage = () => {
         },
        
       }
-      ).catch((e)=>{console.log('error in movies page')});
+      ).catch((e)=>{});
 
     if (countOfAllMoves?.status === 200) {
       const count = await countOfAllMoves.json();
       _productCount=count
-      console.log("testx",( db.countOfProduct!==count))
+      // //console.log("testx",( db.countOfProduct!==count))
 
       if (count !== db.countOfProduct) {
         AllProductData(100,1);
       }else{
-        console.log(db)
+        // //console.log(db)
         
         const databaseVideo=db.currentProduct?.dbDatatosave
         await  databaseVideo.forEach((x) => {
@@ -126,7 +125,7 @@ const ProductPage = () => {
    saveData(products);
   }
     }catch(e){
-      console.log('error in get count')
+      //console.log('error in get count')
     }
     }, []);
 
@@ -140,7 +139,7 @@ const ProductPage = () => {
 const changeProdcut=async (coll,sort) =>{
   
   products=[]
-  console.log('sort = c',(coll+sort))
+  //console.log('sort = c',(coll+sort))
   dispatch(deleteAll)
 AllProductData(coll,sort,pageNumber)
 }
@@ -234,7 +233,7 @@ AllProductData(coll,sort,pageNumber)
                     <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">{product.product_name}</h3>
                     <p className="flex-none rounded-full bg-blue-600 p-2 text-white">
                       {product.product_price}
-                      <span className="ml-1 inline hidden @[275px]/label:inline">EGP</span>
+                      <span className="ml-1 inline ">EGP</span>
                     </p>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ const AboutPage = () => {
         </div>
         <div>
         <Image 
-            src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-07.jpg" 
+            src="https://i.imgur.com/COuJjHa.jpeg" 
             alt="Our workshop" 
             width={300} 
             height={100} 

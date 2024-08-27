@@ -115,9 +115,7 @@ const ContactPage = () => {
            */}
           <h3 className="text-xl font-semibold mb-2">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="#" className="text-blue-500 hover:text-blue-600">Facebook</a>
-            <a href="#" className="text-blue-500 hover:text-blue-600">Instagram</a>
-            <a href="#" className="text-blue-500 hover:text-blue-600">Twitter</a>
+            <a href="https://www.facebook.com/7anddesigner" className="text-blue-500 hover:text-blue-600">Facebook</a>
           </div>
         </div>
       </div>

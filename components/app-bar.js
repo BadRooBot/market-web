@@ -111,7 +111,7 @@ export default function AppBar({onClickDark}) {
             onClick={toggleTheme}
             className="  text-white p-2 rounded-full shadow-lg text-xl"
           >
-            {localStorage.getItem('theme') === 'light' ? '🌙 ' : ' 🌞 '}
+            {theme === 'light' ? '🌙 ' : ' 🌞 '}
           </button>
                 <button onClick={() => dispatch(setCartOpen(!isOpen))} aria-label="Open cart">
                   <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
