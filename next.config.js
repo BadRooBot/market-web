@@ -11,9 +11,9 @@ const nextConfig = {
       },
     ],
   },
+  output: 'standalone',
+
   // distDir: 'build', // Specify the desired output folder name
-
-
 }
 
 module.exports = nextConfig
