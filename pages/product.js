@@ -33,6 +33,7 @@ const ProductPage = () => {
   const [productLimit, setProductLimit] = useState(0);
   const [codeForCollections, setCodeForCollections] = useState(100);
   const [codeForSort, setCodeForSort] = useState(1);
+  const [notFound, setNotFound] = useState(false);
   const router = useRouter();
 
   var { pg,page } = router.query;
@@ -65,6 +66,9 @@ const ProductPage = () => {
     _productCount=products.length;
     saveData(products);
     dispatch(productCount(_productCount));
+    if(_productCount==0){
+      setNotFound(true)
+    }
     // //console.log('All end')
 
   };
@@ -243,7 +247,8 @@ AllProductData(coll,sort,pageNumber)
           ))}
           {/* Add more product items here */}
         </ul>
-        :                   
+        : 
+          notFound? <h1 className="text-3xl text-center  text-neutral-900 dark:text-white ">Nothing here  </h1>:                
           <h1 className="text-3xl text-center  text-neutral-900 dark:text-white animate-bounce">🏐</h1>
 }
       </div>

@@ -8,6 +8,7 @@ import Image from "next/image";
 export default function SearchVideo({ videoId }) {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     getSearchResult(videoId);
@@ -26,6 +27,9 @@ export default function SearchVideo({ videoId }) {
       });
 
       const result = await response.json();
+      if(result.length==0){
+        setNotFound(true)
+      }
       setProducts(result);
       //console.log('result', result);
     } catch (error) {
@@ -73,7 +77,9 @@ export default function SearchVideo({ videoId }) {
             </li>
           ))}
         </ul>
-        : <h1 className="text-3xl text-center  text-neutral-900 dark:text-white animate-bounce">🏐</h1>}
+         : 
+         notFound? <h1 className="text-3xl text-center  text-neutral-900 dark:text-white ">Not Found  </h1>:                
+         <h1 className="text-3xl text-center  text-neutral-900 dark:text-white animate-bounce">🏐</h1>}
       </div>
     </div>
     </div>

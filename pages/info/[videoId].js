@@ -9,22 +9,59 @@ import Head from 'next/head';
 
 const relatedProducts = [
   {
-    product_id: 1,
-    product_name: 'BadRooBot',
-    product_price: 10.20,
-    product_bio: '     ',
-    imageurl: 'https://i.imgur.com/z62q52V.jpeg',
+    product_id: 7,
+    product_name: 'Sea bag ',
+    product_price: 800.00,
+    product_bio: ' bag details 🦋👜♡خيط كليم سوبر ♡مقاس صغير ومتاح تنفيذها باي مقاس ♡تنفع للبحر ♡وكمان خروج',
+    imageurl: 'https://i.imgur.com/CSE96WK.jpeg',
     additional_images: [
-      'https://i.imgur.com/4595fj7.jpeg',
-      'https://i.imgur.com/eYIYsPt.jpeg',
-      'https://i.imgur.com/WcXDRjj.jpeg',
-      'https://i.imgur.com/nt0Iy27.jpeg',
+      "https://i.imgur.com/fbpTJMz.jpeg",
+      "https://i.imgur.com/nWUoKxC.jpeg",
+      "https://i.imgur.com/GG9q9b7.jpeg",
+      "https://i.imgur.com/GFSo2B8.jpeg",
+      "https://i.imgur.com/BvJ2Eds.jpeg",
+      "https://i.imgur.com/E9VxRjI.jpeg"
     ],
     release_time: "8/5/2024",
     product_colors:['When confirming the order, the colors will be chosen'],
     tag: ['bag']
   },
-  
+  {
+    product_id: 9,
+    product_name: 'seashell bag ',
+    product_price: 800.00,
+    product_bio: 'bag details  👜💚♡الديزاين من خيط الخيش عالي الجوده  👜♡ مدعمه من الداخل  و متبطنة وبسوسته من جوا  وعميقه جدا ونفس والوقت خفيفه♡ مقاس 35*30*5♡تحتوي على حزام جلد قابل للتعديل بحيث يمكن أن تكون الحقيبة إما حقيبة كتف أو حقيبة كروس أو محمولة باليد.',
+    imageurl: 'https://i.imgur.com/gQV3ae0.jpeg',
+    additional_images:[
+      "https://i.imgur.com/ud65oVB.jpeg",
+      "https://i.imgur.com/r4eavcW.jpeg",
+      "https://i.imgur.com/ZWn88TM.jpeg",
+      "https://i.imgur.com/3l3cFvj.jpeg",
+      "https://i.imgur.com/koGViFC.jpeg"
+    ],
+    release_time: "8/5/2024",
+    product_colors:['When confirming the order, the colors will be chosen'],
+    tag: ['bag']
+  },{
+    product_id: 10,
+    product_name: 'sunflower ',
+    product_price: 800.00,
+    product_bio: ' bag details  تصميم حصري ومميز ♡الديزاين من خيط السلسه عالي الجوده  👜♡ يد كروس من الخيط  😉😍♡ مدعمه من الداخل  و متبطنة وبسوسته من جوا  وعميقه جدا وطبعا خفيفه♡ مقاس 18*23*6',
+    imageurl: 'https://i.imgur.com/l7b2wVU.jpeg',
+    additional_images: [
+      "https://i.imgur.com/9U33XYU.jpeg",
+      "https://i.imgur.com/d7Jii33.jpeg",
+      "https://i.imgur.com/SMHAlN9.jpeg",
+      "https://i.imgur.com/cuyauln.jpeg",
+      "https://i.imgur.com/sfE9uoJ.jpeg",
+      "https://i.imgur.com/khpuKqH.jpeg",
+      "https://i.imgur.com/6skWUI2.jpeg",
+      "https://i.imgur.com/puW0rkG.jpeg"
+    ],
+    release_time: "8/5/2024",
+    product_colors:['When confirming the order, the colors will be chosen'],
+    tag: ['bag']
+  }
 ];
 
 const Watch = ({ videoId }) => {

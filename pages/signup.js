@@ -1,49 +1,51 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import 'tailwindcss/tailwind.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 import {API_URL} from'@/myenv'
+const myLogo = 'https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/6.png?alt=media&token=8bbe9ed7-233e-4726-bc7a-02624e5c8228';
 
-
-const myLogo='https://firebasestorage.googleapis.com/v0/b/black-lotus-9a724.appspot.com/o/6.png?alt=media&token=8bbe9ed7-233e-4726-bc7a-02624e5c8228';
 export default function Signup() {
-  const [Iserror, setIserror] = useState(false);
+  const [Iserror, setIsError] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
   const cancelButtonRef = useRef(null);
-
   const router = useRouter();
-  const title = 'Failed to register ';
-  const  text= 'Please double-check your password and email, if you are sure of the email maybe the email is already registered try logging in';
+  const title = 'Failed to register';
+  const text = 'Please double-check your password and email. If you are sure of the email, maybe the email is already registered. Try logging in.';
+
   useEffect(() => {
     const { error } = router.query;
-    setIserror(error === '500'); // Use strict comparison
+    setIsError(error === '500');
   }, [router.query.error]);
+
   const { protocol, hostname, port } = window.location;
-  const currentUrl = `${protocol}//${hostname}:${port}`;
-    
-    return (
+  const currentUrl = `${protocol}//${hostname}${port ? `:${port}` : ''}`;
 
-      <>
-      
-<>
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!captchaToken) {
+      alert('Please complete the CAPTCHA');
+      return;
+    }
+    event.target.submit();
+  };
 
+  const handleCaptchaChange = (value) => {
+    setCaptchaToken(value);
+  };
 
+  return (
+    <>
+      <Script
+        src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
+      />
 <Transition.Root show={Iserror} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setIserror(false)}>
           <div className="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0">
@@ -114,14 +116,12 @@ export default function Signup() {
       </Transition.Root>
 
 
-</>
-
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
-          <div className='sm:mx-auto sm:w-full sm:max-w-sm p-3 dark:bg-black bg-neutral-300 shadow-lg shadow-neutral-700 rounded-lg'>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
+        <div className='sm:mx-auto sm:w-full sm:max-w-sm p-3 dark:bg-black bg-neutral-300 shadow-lg shadow-neutral-700 rounded-lg'>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-          <Image
-            width={400}
-            height={400}
+            <Image
+              width={400}
+              height={400}
               className="mx-auto h-40 w-auto"
               src={myLogo}
               alt="Lotus"
@@ -132,10 +132,10 @@ export default function Signup() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form  id="login-form" className="space-y-6" action={`${API_URL}/user/handle/signup`} method="POST" >
-          <input hidden value={currentUrl} name='xyz'id='xyz'type='text'/>
+            <form id="login-form" className="space-y-6" action={`${API_URL}/user/handle/signup`} method="POST" onSubmit={handleSubmit}>
+              <input hidden value={currentUrl} name='xyz' id='xyz' type='text'/>
 
-          <div>
+              <div>
                 <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-400">
                   Name
                 </label>
@@ -151,7 +151,6 @@ export default function Signup() {
                 </div>
               </div>
   
-          
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-400">
                   Email address
@@ -168,13 +167,11 @@ export default function Signup() {
                 </div>
               </div>
 
-  
               <div>
                 <div className="flex items-center justify-between">
                   <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-400">
                     Password
                   </label>
-                  
                 </div>
                 <div className="mt-2">
                   <input
@@ -187,6 +184,8 @@ export default function Signup() {
                   />
                 </div>
               </div>
+
+              <div className="g-recaptcha" data-sitekey="6LeSrzUqAAAAAPVVIfPP_TxOQJnnIVk8k8ZoFAg_"  data-callback="handleCaptchaChange"></div>
   
               <div>
                 <button
@@ -199,15 +198,14 @@ export default function Signup() {
             </form>
   
             <p className="mt-10 text-center text-sm text-gray-500">
-              You are member?{' '}
+              Already a member?{' '}
               <Link href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                login !!
+                Login
               </Link>
             </p>
           </div>
-          </div>
         </div>
-      </>
-    )
-  }
-  
+      </div>
+    </>
+  );
+}

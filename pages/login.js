@@ -1,18 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Fragment, useRef, useState } from 'react';
@@ -21,6 +6,7 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import 'tailwindcss/tailwind.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 import {API_URL} from'@/myenv'
 
 
@@ -32,6 +18,7 @@ export default function Login() {
   const { protocol, hostname, port } = window.location;
   const currentUrl = `${protocol}//${hostname}:${port}`;
   const [Iserror, setIserror] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
   const cancelButtonRef = useRef(null);
 
   const router = useRouter();
@@ -41,6 +28,19 @@ export default function Login() {
     const { error } = router.query;
     setIserror(error === '500'); // Use strict comparison
   }, [router.query.error]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!captchaToken) {
+      alert('Please complete the CAPTCHA');
+      return;
+    }
+    event.target.submit();
+  };
+
+  const handleCaptchaChange = (value) => {
+    setCaptchaToken(value);
+  };
 
   const sendDataToServerToLogin=async ()=>{
     const signup = await fetch(
@@ -61,7 +61,11 @@ export default function Login() {
   return (
       <>
 
-
+<Script
+        src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
+      />
 
 <>
 
@@ -210,7 +214,7 @@ export default function Login() {
                   />
                 </div>
               </div>
-  
+              <div className="g-recaptcha" data-sitekey="6LeSrzUqAAAAAPVVIfPP_TxOQJnnIVk8k8ZoFAg_"  data-callback="handleCaptchaChange"></div>
               <div>
                 <button
                   type="submit"
