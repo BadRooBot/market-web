@@ -185,7 +185,7 @@ export default function Signup() {
                 </div>
               </div>
 
-              <div className="g-recaptcha" data-sitekey="6LeSrzUqAAAAAPVVIfPP_TxOQJnnIVk8k8ZoFAg_"  data-callback="handleCaptchaChange"></div>
+              <div className="g-recaptcha" data-sitekey="6LcPtjUqAAAAAKRlur2wEIqqhQ_ZHSrlZqVxD2yY"  data-callback="handleCaptchaChange"></div>
   
               <div>
                 <button
